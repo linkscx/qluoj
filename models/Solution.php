@@ -213,12 +213,12 @@ class Solution extends ActiveRecord
         return $res;
     }
 
-    public function getResult($res)
+    public function getResult()
     {
-        //$res = self::getResultList($this->result);
+        $res = self::getResultList($this->result);
         $loadingImgUrl = Yii::getAlias('@web/images/loading.gif');
 
-        if ($res <= Solution::OJ_WAITING_STATUS) {
+        if ($this->result <= Solution::OJ_WAITING_STATUS) {
             $waitingHtmlDom = 'waiting="true"';
             $loadingImg = "<img src=\"{$loadingImgUrl}\">";
         } else {
@@ -246,38 +246,6 @@ class Solution extends ActiveRecord
             "text-danger", // No Test Data
         ];
         return "<strong class=" . $cssClass[$this->result] . " $innerHtml>{$res}{$loadingImg}</strong>";
-    }
-    public function getResultC($res)
-    {
-    	//$res = self::getResultList($this->result);
-        $loadingImgUrl = Yii::getAlias('@web/images/loading.gif');
-
-        if ($res <= Solution::OJ_WAITING_STATUS) {
-            $waitingHtmlDom = 'waiting="true"';
-            $loadingImg = "<img src=\"{$loadingImgUrl}\">";
-        } else {
-            $waitingHtmlDom = 'waiting="false"';
-            $loadingImg = "";
-        }
-        // 定义各个测评状态的颜色
-        // https://v3.bootcss.com/css/#helper-classes
-        $cssClass = [
-            "text-muted", // Pending
-            "text-muted",
-            "text-muted",
-            "text-muted",
-            "text-success", // AC
-            "text-warning", // PE
-            "text-danger",  // WA
-            "text-warning", // TLE
-            "text-warning", // MLE
-            "text-warning", // OLE
-            "text-warning", // RE
-            "text-warning", // CE
-            "text-danger",  // SE
-            "text-danger", // No Test Data
-        ];
-        return "<strong class=" . $cssClass[$res] . " </strong>";
     }
 
     public static function getResultList($res = '')
