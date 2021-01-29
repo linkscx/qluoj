@@ -23,7 +23,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="shortcut icon" href="<?= Yii::getAlias('@web') ?>/favicon.ico">
+    <!--<link rel="shortcut icon" href="<?= Yii::getAlias('@web') ?>/favicon.ico"> -->
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -35,7 +35,7 @@ AppAsset::register($this);
                 <div class="logo pull-left">
                     <div class="pull-left">
                         <a class="navbar-brand" href="<?= Yii::$app->request->baseUrl ?>">
-                            <img src="<?= Yii::getAlias('@web') ?>/images/logo.png" />
+                            <img src="https://s3.ax1x.com/2021/01/29/yi7L60.png" width=512px height=256px /> 
                         </a>
                     </div>
                     <div class="brand">

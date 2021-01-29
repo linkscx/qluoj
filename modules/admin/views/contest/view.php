@@ -212,7 +212,17 @@ $problems = $model->problems;
                             <?= Html::label(Yii::t('app', 'New Problem ID'), 'new_problem_id') ?>
                             <?= Html::textInput('new_problem_id', $p['problem_id'],['class' => 'form-control']) ?>
                         </div>
-
+                        
+			<div class="form-group">
+                            <?= Html::label(Yii::t('app', 'Points'), 'Points') ?>
+                            <?= Html::textInput('points', '500',['class' => 'form-control']) ?>
+                        </div>
+                        
+                        <div class="form-group">
+                            <?= Html::label(Yii::t('app', 'PointsDecreasePerMinute'), 'PointsDecreasePerMinute') ?>
+                            <?= Html::textInput('decr', '2',['class' => 'form-control']) ?>
+                        </div>
+                        
                         <div class="form-group">
                             <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary']) ?>
                         </div>

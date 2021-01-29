@@ -74,7 +74,15 @@ class ContestController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+    public function ChangeProblemPoints($pid,$cid,$point,$decr)
+    {
+    	$command=Yii::$app->db->createCommand('UPDATE contest_problem SET points=:pt , decrease=:decr WHERE problem_id=:pid and contest_id=:cid');
+    	$command->bindValue(':pid', $pid);
+    	$command->bindValue(':cid', $cid);
+    	$command->bindValue(':pt', $point);
+    	$command->bindValue(':decr', $decr);
+    	$command->execute();
+    }
     public function actionUpdateproblem($id)
     {
         $model = $this->findModel($id);
@@ -90,6 +98,7 @@ class ContestController extends Controller
                 ->from('{{%problem}}')
                 ->where('id=:id', [':id' => $pid])
                 ->exists();
+            $this->ChangeProblemPoints($pid,$model->id,intval($post['points']),intval($post['decr']));
             if ($has_problem1 && $has_problem2) {
                 $problem_in_contest = (new Query())->select('problem_id')
                     ->from('{{%contest_problem}}')
@@ -97,6 +106,7 @@ class ContestController extends Controller
                     ->exists();
                 if ($problem_in_contest) {
                     Yii::$app->session->setFlash('info', Yii::t('app', 'This problem has in the contest.'));
+                    return $this->redirect(['contest/view', 'id' => $id]);
                     return $this->refresh();
                 }
 

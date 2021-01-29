@@ -11,8 +11,9 @@ $this->title = Yii::$app->setting->get('ojName');
 <div class="row blog">
     <div class="col-md-8">
         <div class="jumbotron">
-            <h1>Hello, world!</h1>
+            <h1>Welcome!!!</h1>
             <p>欢迎来到<?= Yii::$app->setting->get('schoolName') ?>在线判题系统——<?= Yii::$app->setting->get('ojName') ?> Online Judge</p>
+            <img src="https://s3.ax1x.com/2021/01/29/yi73o4.jpg" width=400px height=300px />
         </div>
         <hr>
         <div class="blog-main">
@@ -30,8 +31,8 @@ $this->title = Yii::$app->setting->get('ojName');
     </div>
     <div class="col-md-4">
         <div class="sidebar-module sidebar-module-inset">
-            <h4>关于</h4>
-            <p>Online Judge系统（简称OJ）是一个在线的判题系统。 用户可以在线提交程序多种程序（如C、C++、Java）源代码，系统对源代码进行编译和执行， 并通过预先设计的测试数据来检验程序源代码的正确性。</p>
+            <h4>关于齐鲁工业大学（山东省科学院）</h4>
+            <p>齐鲁工业大学（山东省科学院）坐落于国家历史文化名城——泉城济南，是山东省重点建设的应用研究型大学，山东省最大的综合性自然科学研究机构，山东省属高校高水平大学“冲一流”建设高校。</p>
         </div>
         <?php if (!empty($contests)): ?>
         <div class="sidebar-module">

@@ -35,7 +35,7 @@ class Contest extends \yii\db\ActiveRecord
     /**
      * 第一次参加排位赛的初始分数
      */
-    const RATING_INIT_SCORE = 1149;
+    const RATING_INIT_SCORE = 1500;
 
     /**
      * 比赛的状态信息
@@ -569,7 +569,7 @@ class Contest extends \yii\db\ActiveRecord
         }
 
         usort($result, function($a, $b) {
-            if ($a['solved'] != $b['solved']) { //优先解题数
+            if ($a['solved'] != $b['solved'] &&$this->type != self::TYPE_RANK_SINGLE) { //优先解题数
                 return $a['solved'] < $b['solved'];
             } else if ($a['time'] != $b['time']) { //按时间（分数）
                 if ($this->type == self::TYPE_RANK_SINGLE) {
@@ -840,17 +840,17 @@ class Contest extends \yii\db\ActiveRecord
 
             // 此处 ELO 算法中 K 的合理性有待改进
             if ($old < 1150) {
-                $eloK = 5;
+                $eloK = 400;
             } else if ($old < 1400) {
-                $eloK = 6;
+                $eloK = 300;
             } else if ($old < 1650) {
-                $eloK = 7;
+                $eloK = 280;
             } else if ($old < 1900) {
-                $eloK = 8;
+                $eloK = 200;
             } else if ($old < 2150) {
-                $eloK = 9;
+                $eloK = 150;
             } else {
-                $eloK = 10;
+                $eloK = 100;
             }
             $newRating = intval($old + $eloK * (($userCount - $rankResult[$user['user_id']]['rank']) - $exp));
 
