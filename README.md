@@ -4,7 +4,7 @@
 </p>
 
 QLUOJ是一款基于JNOJ开发的OJ   
-![](https://s3.ax1x.com/2021/01/29/yizTbR.md.png)
+![](docs/images/show.png)
 
 更新日志  
 ----------  
@@ -21,7 +21,7 @@ QLUOJ是一款基于JNOJ开发的OJ
 
 联系我  
 ----------
-![](https://s3.ax1x.com/2021/01/29/yizJHI.png)
+![](docs/images/contact.png)
 
 
 目录结构  
