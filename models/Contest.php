@@ -7,7 +7,8 @@ use yii\db\Query;
 use yii\db\Expression;
 use yii\helpers\FileHelper;
 use yii\caching\TagDependency;
-
+                ini_set("display_errors","On");
+		    error_reporting(E_ALL);
 /**
  * This is the model class for table "{{%contest}}".
  *
@@ -252,7 +253,29 @@ class Contest extends \yii\db\ActiveRecord
             ', [':cid' => $this->id])->queryAll();
         }, 60, $dependency);
     }
-
+    
+    /*
+    	get problem points
+    */
+    public function getPoints($pid,$cid)
+    {
+    	$command = Yii::$app->db->createCommand('SELECT points FROM contest_problem WHERE problem_id=:pid and contest_id=:cid');
+    	$command->bindValue(':pid', $pid);
+    	$command->bindValue(':cid', $cid);
+    	return $command->queryScalar();
+    }
+    
+    /*
+    	get problem points dcrease per second
+    */
+    
+    public function getPointsDecrease($pid,$cid)
+    {
+    	$command = Yii::$app->db->createCommand('SELECT decrease FROM contest_problem WHERE problem_id=:pid and contest_id=:cid');
+    	$command->bindValue(':pid', $pid);
+    	$command->bindValue(':cid', $cid);
+    	return $command->queryScalar();
+    }
     /**
      * 获取用户提交
      * @param boolean $betweenContest
@@ -508,7 +531,7 @@ class Contest extends \yii\db\ActiveRecord
 
                 if (empty($first_blood[$pid])) {
                     if ($this->type == self::TYPE_RANK_SINGLE) {
-                        $result[$user]['time'] += 0.1 * self::BASIC_SCORE;
+                        //$result[$user]['time'] += 0.1 * self::BASIC_SCORE;
                     }
                     $first_blood[$pid] = $user;
                 }
@@ -516,9 +539,14 @@ class Contest extends \yii\db\ActiveRecord
                 ++$result[$user]['solved'];
                 // 单人赛计分，详见 view/wiki/contest.php。
                 if ($this->type == self::TYPE_RANK_SINGLE) {
-                    $score = 0.5 * self::BASIC_SCORE + max(0, self::BASIC_SCORE - 2 * $sec / 60 - $result[$user]['wa_count'][$pid] * 50);
+                    $points = $this->getPoints($pid,$this->id);
+                    $decr = $this->getPointsDecrease($pid,$this->id);
+                    //$points = (int)$points;
+                    $score = max(0.3*$points, $points-$decr * $sec / 60 - $result[$user]['wa_count'][$pid] * 50);
+                    //$score=500;
                     $result[$user]['ac_time'][$pid] = $score;
                     $result[$user]['time'] += $score;
+                    
                 } else {
                     // 记录解答时间
                     if ($created_at < $contest_end_time) {
@@ -959,3 +987,4 @@ class Contest extends \yii\db\ActiveRecord
         });
     }
 }
+
