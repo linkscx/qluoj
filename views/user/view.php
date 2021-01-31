@@ -35,8 +35,9 @@ for (var i in contests_json) {
         "1571360",
         contests_json[i].title,
     ]);
+    var re= new Date(contests_json[i].start_time*1000);
     data2.push([
-        contests_json[i].start_time * 1000, contests_json[i].total
+        re, contests_json[i].total
     ]);
 }
 var datas = [
@@ -48,19 +49,19 @@ var markings = [
     { color: '#a00', lineWidth: 1, yaxis: { from: 3000 } },
     { color: '#f33', lineWidth: 1, yaxis: { from: 2600, to: 2999 } },
     { color: '#f77', lineWidth: 1, yaxis: { from: 2400, to: 2599 } },
-    { color: '#ffcc88', lineWidth: 1, yaxis: { from: 2150, to: 2399 } },
-    { color: '#f8f', lineWidth: 1, yaxis: { from: 1900, to: 2149 } },
-    { color: '#aaf', lineWidth: 1, yaxis: { from: 1650, to: 1899 } },
-    { color: '#77ddbb', lineWidth: 1, yaxis: { from: 1400, to: 1649 } },
-    { color: '#7f7', lineWidth: 1, yaxis: { from: 1150, to: 1399 } },
-    { color: '#ccc', lineWidth: 1, yaxis: { from: 0, to: 1149 } },
+    { color: '#ffcc88', lineWidth: 1, yaxis: { from: 2100, to: 2399 } },
+    { color: '#f8f', lineWidth: 1, yaxis: { from: 1900, to: 2099 } },
+    { color: '#aaf', lineWidth: 1, yaxis: { from: 1600, to: 1899 } },
+    { color: '#77ddbb', lineWidth: 1, yaxis: { from: 1400, to: 1599 } },
+    { color: '#7f7', lineWidth: 1, yaxis: { from: 1200, to: 1390 } },
+    { color: '#ccc', lineWidth: 1, yaxis: { from: 0, to: 1199 } },
 ];
 
 var options = {
     lines: { show: true },
     points: { show: true },
-    xaxis: { mode: "time" },
-    yaxis: { min: min_score - 400, max: max_score + 600, ticks: [1150, 1400, 1650, 1900, 2150, 2300, 2400, 2600, 3000] },
+    xaxis: { mode: "time" ,  timeformat: "%Y/%m/%d"},
+    yaxis: { min: min_score - 400, max: max_score + 600, ticks: [1200, 1400, 1600, 1900, 2100,2400,2600,3000] },
     grid: { hoverable: true, markings: markings }
 };
 
@@ -94,9 +95,11 @@ $("#placeholder").bind("plothover", function (event, pos, item) {
             var contestUrl = params[7];
             var rank = params[6];
             var title = params[8];
+            var date = new Date(params[0]);
             var html = "= " + total + " (" + change + "), " + title + "<br/>"
                             + "Rank: " + rank + "<br/>"
-                            + "<a href='" + contestUrl + "'>" + contestName + "</a>";
+                            + "<a href='" + contestUrl + "'>" + contestName + "</a>"
+                            + "<br>" + date;
             showTooltip(item.pageX, item.pageY, html);
             setTimeout(function () {
                 $("#tooltip").fadeOut(200);
@@ -112,7 +115,13 @@ $this->registerJs($plotJS);
 ?>
 <div class="user-view">
 
-    <h1><?= $model->getColorName() ?> <small><?= $model->getRatingLevel() ?></small></h1>
+     
+    <h1>
+    	<small>
+    	<?= $model->getRatingLevel() ?>
+    	</small>
+    	<br>
+    	<?= $model->getColorName() ?></h1>
     <hr>
     <?php if ($model->role != \app\models\User::ROLE_PLAYER): ?>
         <div class="row">

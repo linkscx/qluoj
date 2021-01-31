@@ -379,29 +379,58 @@ class User extends ActiveRecord implements IdentityInterface
             ->all();
     }
 
-    public function getRatingLevel($rating = -1)
+       public function getRatingLevel($rating = -1)
     {
+        $colors = [
+            'user-black',
+            'user-gray',
+            'user-green',
+            'user-cyan',
+            'user-blue',
+            'user-violet',
+            'user-orange',
+            'user-red',
+            'user-yellow',
+            'user-fire',
+            'user-admin'
+        ];
         if ($rating == -1)
             $rating = $this->rating;
-        if ($this->role == self::ROLE_ADMIN) {
-            return Yii::t('app', 'Headquarters');
-        } else if ($rating == NULL) {
-            return Yii::t('app', 'Unrated');
-        } else if ($rating < 1150) {
-            return Yii::t('app', 'Bronze');
+        if (empty($rating)) {
+            $tmp = $colors[0];
+        } else if ($rating < 1200) {
+            $tmp = $colors[1];
         } else if ($rating < 1400) {
-            return Yii::t('app', 'Silver');
-        } else if ($rating < 1650) {
-            return Yii::t('app', 'Gold');
+            $tmp = $colors[2];
+        } else if ($rating < 1600) {
+            $tmp = $colors[3];
         } else if ($rating < 1900) {
-            return Yii::t('app', 'Platinum');
-        } else if ($rating < 2150) {
-            return Yii::t('app', 'Diamond');
-        } else if ($rating < 2400) {
-            return Yii::t('app', 'Master');
+            $tmp = $colors[4];
+        } else if ($rating < 2100) {
+            $tmp = $colors[5];
         } else {
-            return Yii::t('app', 'Challenger');
+            $tmp = $colors[6];
         }
+        if ($this->role == self::ROLE_ADMIN) {
+             $re='Headquarters';
+        } else if ($rating == NULL) {
+             $re='Unrated';
+        } else if ($rating < 1200) {
+             $re='Newbie';
+        } else if ($rating < 1400) {
+             $re='Pupil';
+        } else if ($rating < 1600) {
+             $re='Specialist';
+        } else if ($rating < 1900) {
+             $re='Expert';
+        } else if ($rating < 2100) {
+             $re='Candidate Master';
+        } else if ($rating < 2400) {
+             $re='Master';
+        } else {
+             $re='Grand Master';
+        }
+        return "<span class=\"{$tmp}\">{$re}</span>";
     }
 
     /**
@@ -421,24 +450,24 @@ class User extends ActiveRecord implements IdentityInterface
             'user-green',
             'user-cyan',
             'user-blue',
-            'user-orange',
             'user-violet',
+            'user-orange',
+            'user-red',
             'user-yellow',
             'user-fire',
-            'user-red',
             'user-admin'
         ];
         if (empty($rating)) {
             $tmp = $colors[0];
-        } else if ($rating < 1150) {
+        } else if ($rating < 1200) {
             $tmp = $colors[1];
         } else if ($rating < 1400) {
             $tmp = $colors[2];
-        } else if ($rating < 1650) {
+        } else if ($rating < 1600) {
             $tmp = $colors[3];
         } else if ($rating < 1900) {
             $tmp = $colors[4];
-        } else if ($rating < 2150) {
+        } else if ($rating < 2100) {
             $tmp = $colors[5];
         } else {
             $tmp = $colors[6];
@@ -459,26 +488,26 @@ class User extends ActiveRecord implements IdentityInterface
             'user-green',
             'user-cyan',
             'user-blue',
-            'user-orange',
             'user-violet',
+            'user-orange',
+            'user-red',
             'user-yellow',
             'user-fire',
-            'user-red',
             'user-admin'
         ];
         if ($this->role == self::ROLE_ADMIN) {
             $tmp = $colors[10];
         } else if ($rating == NULL) {
             $tmp = $colors[0];
-        } else if ($rating < 1150) {
+        } else if ($rating < 1200) {
             $tmp = $colors[1];
         } else if ($rating < 1400) {
             $tmp = $colors[2];
-        } else if ($rating < 1650) {
+        } else if ($rating < 1600) {
             $tmp = $colors[3];
         } else if ($rating < 1900) {
             $tmp = $colors[4];
-        } else if ($rating < 2150) {
+        } else if ($rating < 2100) {
             $tmp = $colors[5];
         } else {
             $tmp = $colors[6];
