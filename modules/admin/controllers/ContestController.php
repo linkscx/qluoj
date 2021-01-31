@@ -215,26 +215,36 @@ class ContestController extends Controller
                 foreach ($users as $username) {
                     //　查找用户ID 以及查看是否已经加入比赛中
                     $username = trim($username);
-                    $query = (new Query())->select('u.id as user_id, count(c.user_id) as exist')
+                    $query = (new Query())->select('u.id as user_id')
                         ->from('{{%user}} as u')
-                        ->leftJoin('{{%contest_user}} as c', 'c.user_id=u.id')
-                        ->where('u.username=:name and c.contest_id=:cid', [':name' => $username, ':cid' => $model->id])
+                        //->leftJoin('{{%contest_user}} as c', 'c.user_id=u.id')
+                        ->where('u.username=:name', [':name' => $username])
                         ->one();
                     if (!isset($query['user_id'])) {
                         $message .= $username . " 不存在该用户<br>";
-                    } else if (!$query['exist']) {
-                        Yii::$app->db->createCommand()->insert('{{%contest_user}}', [
-                            'user_id' => $query['user_id'],
+                    } else{
+                        $uid = $query['user_id'];
+                        $query = (new Query())->select('count(user_id) as exist')
+                        ->from('{{%contest_user}}')
+                        //where('u.username=:name and c.contest_id=:cid', [':name' => $username, ':cid' => $model->id])
+                        ->where('user_id=:uid and contest_id=:cid',[':uid' => $uid, ':cid' => $model->id])
+                        ->one();
+                        if(intval($query['exist'])==0)
+                        {
+                        	Yii::$app->db->createCommand()->insert('{{%contest_user}}', [
+                            'user_id' => $uid,
                             'contest_id' => $model->id,
-                        ])->execute();
-                        $message .= $username . " 添加成功<br>";
-                    } else {
+                        	])->execute();
+                        	$message .= $username . " 添加成功<br>";
+                     	}
+                     	else {
                         $message .= $username . " 已参加比赛<br>";
                     }
                 }
                 Yii::$app->session->setFlash('info', $message);
             }
             return $this->refresh();
+        }
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -248,6 +258,7 @@ class ContestController extends Controller
             'dataProvider' => $dataProvider,
             'generatorForm' => $generatorForm
         ]);
+    
     }
 
     /**
