@@ -835,25 +835,28 @@ class Contest extends \yii\db\ActiveRecord
                     }
                 }
             } else {
-                $exp = intval($userCount / 2);
+                $exp = 1+($userCount / 2);
             }
 
             // 此处 ELO 算法中 K 的合理性有待改进
-            if ($old < 1150) {
+            if ($old < 1200) {
                 $eloK = 400;
             } else if ($old < 1400) {
                 $eloK = 300;
-            } else if ($old < 1650) {
+            } else if ($old < 1600) {
                 $eloK = 280;
             } else if ($old < 1900) {
                 $eloK = 200;
-            } else if ($old < 2150) {
+            } else if ($old < 2100) {
                 $eloK = 150;
             } else {
-                $eloK = 100;
+                $eloK = 120;
             }
-            $newRating = intval($old + $eloK * (($userCount - $rankResult[$user['user_id']]['rank']) - $exp));
-
+            $newRating = $old + $eloK * (($userCount - $rankResult[$user['user_id']]['rank']) - $exp);
+	    $newRating*=0.95;
+	    $newRating=intval($newRating);
+	    if($newRating-$old>=400) $newRating=$old+400;
+	    if($newRating-$old<=-150) $newRating=$old-150;
             // echo $old . " " . $newRating . " " . ($newRating - $old) . "<br>";
             Yii::$app->db->createCommand()->update('{{%user}}', [
                 'rating' => $newRating
