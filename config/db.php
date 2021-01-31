@@ -4,7 +4,7 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=jnoj',
     'username' => 'debian-sys-maint',
-    'password' => 'Evo7JLxCBve0GgyW',
+    'password' => 'ONciTQ7RgJp8Wo8z',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
