@@ -11,14 +11,11 @@
         </thead>
         <tbody>
         <tr>
-            <th>单人</th>
+            <th>Codeforces</th>
             <th>
-                比赛中的每道题目，都有一个分数 N (N = 500)，正确解答一道题目，会得到一个基础分数，基础分数为 50%N．最快答题可以得到 10%N．
-                每次不为 AC 的提交，会扣50分．题目分数会随时间线性减少，每分钟减少 2 分．<br>
-                得分计算方式为：<br>
-                    非最快答题：x = 50% * N + max(0, N - 2 * 分钟 - 50 * 未AC次数)<br>
-                    最快答题：x = 50% * N + max(0, N - 2 * 分钟 - 50 * 未AC次数) + 10% * N<br>
-                榜单将按解题数从多到少排序，如果解题数相同，则按得分总和从高到低排序。
+               赛制为Codeforces赛制，所谓的Codeforces赛制，就是每个题目都有不同的权值分，而且随着时间的推移，获得的权值分也会降低，按照最终得分大小排名<br>
+注意每次错误提交会扣除50分，所得的分数不会低于初始权值的30%<br>
+所以可能会有做一个难题顶仨简单题的情况 
             </th>
             <th>要想拿高分：争取拿一血，争取用最少提交来解题，争取最快解题</th>
         </tr>
@@ -78,31 +75,31 @@
         </thead>
         <tbody>
         <tr>
-            <th>青铜 [Bronze]</th>
-            <th>Between 0 and 1149</th>
+            <th>Newbie</th>
+            <th>Between 0 and 1199</th>
         </tr>
         <tr>
-            <th>白银 [Silver]</th>
-            <th>Between 1150 and 1399</th>
+            <th>Pupil</th>
+            <th>Between 1200 and 1399</th>
         </tr>
         <tr>
-            <th>黄金 [Gold]</th>
-            <th>Between 1400 and 1649</th>
+            <th>Specialist</th>
+            <th>Between 1400 and 1599</th>
         </tr>
         <tr>
-            <th>铂金 [Platinum]</th>
-            <th>Between 1650 and 1899</th>
+            <th>Expert</th>
+            <th>Between 1600 and 1899</th>
         </tr>
         <tr>
-            <th>钻石 [Diamond]</th>
-            <th>Between 1900 and 2149</th>
+            <th>Candidate Master</th>
+            <th>Between 1900 and 2099</th>
         </tr>
         <tr>
-            <th>超凡大师 [Challenger]</th>
-            <th>Between 2150 and 2399</th>
+            <th>Master</th>
+            <th>Between 2100 and 2399</th>
         </tr>
         <tr>
-            <th>最强王者 [Master]</th>
+            <th>Grand Master</th>
             <th>2400 and above</th>
         </tr>
         </tbody>
