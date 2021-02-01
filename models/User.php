@@ -432,7 +432,60 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return "<span class=\"{$tmp}\">{$re}</span>";
     }
-
+    
+    public function getRating($rating = -1)
+    {
+        $colors = [
+            'user-black',
+            'user-gray',
+            'user-green',
+            'user-cyan',
+            'user-blue',
+            'user-violet',
+            'user-orange',
+            'user-red',
+            'user-yellow',
+            'user-fire',
+            'user-admin'
+        ];
+        if ($rating == -1)
+            $rating = $this->rating;
+        if (empty($rating)) {
+            $tmp = $colors[0];
+        } else if ($rating < 1200) {
+            $tmp = $colors[1];
+        } else if ($rating < 1400) {
+            $tmp = $colors[2];
+        } else if ($rating < 1600) {
+            $tmp = $colors[3];
+        } else if ($rating < 1900) {
+            $tmp = $colors[4];
+        } else if ($rating < 2100) {
+            $tmp = $colors[5];
+        } else {
+            $tmp = $colors[6];
+        }
+        if ($this->role == self::ROLE_ADMIN) {
+             $re='Headquarters';
+        } else if ($rating == NULL) {
+             $re='Unrated';
+        } else if ($rating < 1200) {
+             $re='Newbie';
+        } else if ($rating < 1400) {
+             $re='Pupil';
+        } else if ($rating < 1600) {
+             $re='Specialist';
+        } else if ($rating < 1900) {
+             $re='Expert';
+        } else if ($rating < 2100) {
+             $re='Candidate Master';
+        } else if ($rating < 2400) {
+             $re='Master';
+        } else {
+             $re='Grand Master';
+        }
+        return "<span class=\"{$tmp}\">Rating: $rating</span>";
+    }
     /**
      * 根据段位返回颜色
      * 该方法在榜单显示时调用

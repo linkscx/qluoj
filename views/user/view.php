@@ -121,7 +121,10 @@ $this->registerJs($plotJS);
     	<?= $model->getRatingLevel() ?>
     	</small>
     	<br>
-    	<?= $model->getColorName() ?></h1>
+    	<?= $model->getColorName() ?>
+    	<br>
+    	<small><?= $model->getRating()?></small>
+    </h1>	
     <hr>
     <?php if ($model->role != \app\models\User::ROLE_PLAYER): ?>
         <div class="row">
