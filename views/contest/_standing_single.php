@@ -9,6 +9,7 @@ use app\models\User;
 /* @var $rankResult array */
 
 $problems = $model->problems;
+$pp=$model->getProblems();
 $first_blood = $rankResult['first_blood'];
 $result = $rankResult['rank_result'];
 $submit_count = $rankResult['submit_count'];
@@ -25,6 +26,8 @@ $submit_count = $rankResult['submit_count'];
         <?php foreach($problems as $key => $p): ?>
             <th>
                 <?= Html::a(chr(65 + $key), ['/contest/problem', 'id' => $model->id, 'pid' => $key]) ?>
+                <br>
+                <samll><?= $model->getPoints($p['problem_id'],$model->id)?></small>
                 <br>
                 <span style="color:#7a7a7a; font-size:12px">
                     <?php

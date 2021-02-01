@@ -56,7 +56,7 @@ pre {
     line-height: 55px;
 }
 #header {
-    background-color: #006179;
+    background-image: linear-gradient(to right, cyan , blue);
     margin-bottom: 0;
     border: medium none;
 }
