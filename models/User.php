@@ -494,7 +494,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param integer $rating
      * @return string 含有颜色的HTML昵称
      */
-    public static function getColorNameByRating($nickname, $rating)
+    public static function getColorNameByRating($nickname, $rating, $role=0)
     {
         $nickname = Html::encode($nickname);
         $colors = [
@@ -511,7 +511,8 @@ class User extends ActiveRecord implements IdentityInterface
             'user-admin'
         ];
         if (empty($rating)) {
-            $tmp = $colors[0];
+            if($role == self::ROLE_ADMIN) $tmp = $colors[10];
+            else $tmp = $colors[0];
         } else if ($rating < 1200) {
             $tmp = $colors[1];
         } else if ($rating < 1400) {

@@ -226,7 +226,7 @@ class Solution extends ActiveRecord
             $loadingImg = "";
         }
         $innerHtml =  'data-verdict="' . $this->result . '" data-submissionid="' . $this->id . '" ' . $waitingHtmlDom;
-
+	if($this->result!=Solution::OJ_AC) $res=$res.""." on test ".strval(intval($this->getPassedTestCount()+1));
         // 定义各个测评状态的颜色
         // https://v3.bootcss.com/css/#helper-classes
         $cssClass = [
@@ -296,7 +296,16 @@ class Solution extends ActiveRecord
     {
         return $this->user->username;
     }
-
+    
+    public function getUserRating()
+    {
+    	return $this->user->rating;
+    }
+    
+    public function getUserRole()
+    {
+    	return $this->user->role;
+    }
     public function getSolutionInfo()
     {
         return $this->hasOne(SolutionInfo::className(), ['solution_id' => 'id']);

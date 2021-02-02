@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use app\models\Solution;
-
+use app\models\User;
 /* @var $this yii\web\View */
 /* @var $model app\models\Solution */
 
@@ -32,12 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <tbody>
         <tr>
             <th><?= $model->id ?></th>
-            <th><?= Html::a(Html::encode($model->user->nickname), ['/user/view', 'id' => $model->created_by]) ?></th>
+            <th><?= Html::a(User::getColorNameByRating($model->getUsername(),$model->getUserRating(),$model->getUserRole()), ['/user/view', 'id' => $model->created_by]) ?></th>
             <th><?= Html::a(Html::encode($model->problem->title), ['/problem/view', 'id' => $model->problem_id]) ?></th>
             <th><?= Solution::getLanguageList($model->language) ?></th>
             <th>
                 <?php if ($model->canViewResult()) {
-                    echo Solution::getResultList($model->result);
+                    echo $model->getResult();
                 } else {
                     echo Solution::getResultList(Solution::OJ_WT0);
                 } ?>

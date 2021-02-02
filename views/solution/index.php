@@ -52,6 +52,7 @@ $this->title = Yii::t('app', 'Status');
                             ['/solution/result', 'id' => $model->id],
                             ['onclick' => 'return false', 'data-click' => "solution_info"]
                         );
+                   
                     } else {
                         return $model->getResult();
                     }
