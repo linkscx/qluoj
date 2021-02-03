@@ -837,7 +837,7 @@ class Contest extends \yii\db\ActiveRecord
                     }
                 }
             } else {
-                $exp = 1+($userCount / 2);
+                $exp = ($userCount / 2);
             }
 
             // 此处 ELO 算法中 K 的合理性有待改进
@@ -854,6 +854,7 @@ class Contest extends \yii\db\ActiveRecord
             } else {
                 $eloK = 5;
             }
+            echo $userCount . " " . $rankResult[$user['user_id']]['rank'] . " " . $exp . "<br>";
             $newRating = $old + $eloK * (($userCount - $rankResult[$user['user_id']]['rank']) - $exp);
 	    $newRating*=0.95;
 	    $newRating=intval($newRating);
