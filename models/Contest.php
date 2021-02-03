@@ -566,6 +566,7 @@ class Contest extends \yii\db\ActiveRecord
                 // 其它情况
                 ++$result[$user]['wa_count'][$pid];
             }
+            ++$result[$user]['submit'];
         }
 
         usort($result, function($a, $b) {
@@ -802,7 +803,7 @@ class Contest extends \yii\db\ActiveRecord
         if ($this->type == self::TYPE_OI) {
             $rankResult = $this->getOIRankData(false)['rank_result'];
         } else {
-            $rankResult = $this->getRankData(false)['rank_result'];
+            $rankResult = $this->getICPCRankData(false)['rank_result'];
         }
         $tmp = [];
         foreach ($rankResult as $k => $user) {
@@ -813,7 +814,7 @@ class Contest extends \yii\db\ActiveRecord
 
         $userCount = 0;
         foreach ($users as $user) {
-            if ($rankResult[$user['user_id']]['submit'] != 0) {
+            if ($rankResult[$user['user_id']]['submit']!= 0) {
                 //如果该场比赛已经计算过了，就不再计算
                 if ($user['rating_change'] != NULL) {
                     //return;
@@ -826,12 +827,12 @@ class Contest extends \yii\db\ActiveRecord
             $exp = 0;
 
             // 没有解决题目的不计算
-            if ($rankResult[$user['user_id']]['submit'] == 0) {
+            if ($rankResult[$user['user_id']]['submit']== 0) {
                 continue;
             }
             if ($user['rating']) {
                 foreach ($users as $u) {
-                    if ($user['user_id'] != $u['user_id'] && $rankResult[$u['user_id']]['submit'] > 0) {
+                    if ($user['user_id'] != $u['user_id'] && $rankResult[$user['user_id']]['submit']> 0) {
                         $exp += 1.0 / (1.0 + pow(10, ($u['rating'] ? $u['rating'] : self::RATING_INIT_SCORE) - $old) / 400.0);
                     }
                 }
@@ -841,17 +842,17 @@ class Contest extends \yii\db\ActiveRecord
 
             // 此处 ELO 算法中 K 的合理性有待改进
             if ($old < 1200) {
-                $eloK = 100;
+                $eloK = 120;
             } else if ($old < 1400) {
-                $eloK = 80;
+                $eloK = 100;
             } else if ($old < 1600) {
-                $eloK = 50;
+                $eloK = 70;
             } else if ($old < 1900) {
-                $eloK = 40;
+                $eloK = 50;
             } else if ($old < 2100) {
-                $eloK = 30;
+                $eloK = 40;
             } else {
-                $eloK = 25;
+                $eloK = 30;
             }
             $newRating = $old + $eloK * (($userCount - $rankResult[$user['user_id']]['rank']) - $exp);
 	    $newRating*=0.95;
