@@ -842,17 +842,17 @@ class Contest extends \yii\db\ActiveRecord
 
             // 此处 ELO 算法中 K 的合理性有待改进
             if ($old < 1200) {
-                $eloK = 120;
+                $eloK = 15;
             } else if ($old < 1400) {
-                $eloK = 100;
+                $eloK = 12;
             } else if ($old < 1600) {
-                $eloK = 70;
+                $eloK = 10;
             } else if ($old < 1900) {
-                $eloK = 50;
+                $eloK = 8;
             } else if ($old < 2100) {
-                $eloK = 40;
+                $eloK = 6;
             } else {
-                $eloK = 30;
+                $eloK = 5;
             }
             $newRating = $old + $eloK * (($userCount - $rankResult[$user['user_id']]['rank']) - $exp);
 	    $newRating*=0.95;
