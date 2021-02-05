@@ -817,7 +817,7 @@ class Contest extends \yii\db\ActiveRecord
             if ($rankResult[$user['user_id']]['submit']> 0) {
                 //如果该场比赛已经计算过了，就不再计算
                 if ($user['rating_change'] != NULL) {
-                    //return;
+                    return;
                 }
                 $userCount++;
             }
