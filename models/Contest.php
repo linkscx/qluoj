@@ -814,7 +814,7 @@ class Contest extends \yii\db\ActiveRecord
 
         $userCount = 0;
         foreach ($users as $user) {
-            if ($rankResult[$user['user_id']]['submit']!= 0) {
+            if ($rankResult[$user['user_id']]['submit']> 0) {
                 //如果该场比赛已经计算过了，就不再计算
                 if ($user['rating_change'] != NULL) {
                     //return;
@@ -822,44 +822,88 @@ class Contest extends \yii\db\ActiveRecord
                 $userCount++;
             }
         }
+        $seed = [];
+        $m = [];
+        $R = [];
+        $d = [];
+        $i = 0;
         foreach ($users as $user) {
+            
+            $i++;
+            $seed[$i] = 0;
             $old = $user['rating'] == NULL ? self::RATING_INIT_SCORE : $user['rating'];
-            $exp = 0;
 
             // 没有解决题目的不计算
-            if ($rankResult[$user['user_id']]['submit']== 0) {
-                continue;
-            }
+            
             if ($user['rating']) {
                 foreach ($users as $u) {
-                    if ($user['user_id'] != $u['user_id'] && $rankResult[$user['user_id']]['submit']> 0) {
-                        $exp += 1.0 / (1.0 + pow(10, ($u['rating'] ? $u['rating'] : self::RATING_INIT_SCORE) - $old) / 400.0);
+                    if ($user['user_id'] != $u['user_id'] &&$rankResult[$u['user_id']]['submit']> 0) {
+                        $seed[$i] += 1.0 / (1.0 + pow(10, ($mid-($u['rating'] ? $u['rating'] : self::RATING_INIT_SCORE) )/400 ));
                     }
                 }
-            } else {
-                $exp = ($userCount / 2);
             }
-
-            // 此处 ELO 算法中 K 的合理性有待改进
-            if ($old < 1200) {
-                $eloK = 15;
-            } else if ($old < 1400) {
-                $eloK = 12;
-            } else if ($old < 1600) {
-                $eloK = 10;
-            } else if ($old < 1900) {
-                $eloK = 8;
-            } else if ($old < 2100) {
-                $eloK = 6;
-            } else {
-                $eloK = 5;
+            $seed[$i] += 1.0;
+            if($user['rating'] == NULL ) $seed[$i]=1+($userCount/2);
+            $m[$i] = sqrt($seed[$i] * ($rankResult[$user['user_id']]['rank']+1));
+            $l=-1000;
+            $r=4000;
+            for($j=1;$j<=100;$j++)
+            {
+            	$mid=($l+$r)/2.0;
+            	$CK=0;
+            	foreach ($users as $u) {
+                    if ($user['user_id'] != $u['user_id'] &&$rankResult[$u['user_id']]['submit']> 0) {
+                        $CK += 1.0 / (1.0 + pow(10, ($mid-($u['rating'] ? $u['rating'] : self::RATING_INIT_SCORE) )/400 ));
+                    }
+                }
+            	if($CK <= $m[$i]) $r=$mid;
+            	else $l=$mid;
             }
-            echo $userCount . " " . $rankResult[$user['user_id']]['rank'] . " " . $exp . "<br>";
-            $newRating = $old + $eloK * (($userCount - $rankResult[$user['user_id']]['rank']) - $exp);
-	    $newRating*=0.95;
-	    $newRating=intval($newRating);
-	    if($newRating-$old>=400) $newRating=$old+400;
-	    if($newRating-$old<=-150) $newRating=$old-150;
+            $d[$i] = intval(($r - $old) / 2);
+        }
+        $i=0;
+        $sum_d = 0;
+        // 第一次微调
+       foreach ($users as $user){
+	$i++;
+             if($rankResult[$user['user_id']]['submit']== 0) continue;
+	$sum_d+=$d[$i];	
+        }
+        $inc=(-1-$sum_d)/$userCount;
+       $i=0;
+         foreach ($users as $user){
+             $i++;
+	if($rankResult[$user['user_id']]['submit']== 0) continue;
+	$d[$i]+=$inc;
+	
+        }
+       $i=0;
+      $sum_d=0;
+       $tmp = min($userCount, intval(4 * sqrt($userCount)));
+        foreach ($users as $user){
+             $i++;
+	if($i>$tmp) break;
+	if($rankResult[$user['user_id']]['submit']== 0) continue;
+	$sum_d += $d[$i];
+	
+        }
+        $inc = min(max(-$sum_d/$tmp,-10),0);
+      $i=0;
+        foreach ($users as $user){
+             $i++;
+	if($i>$tmp) break;
+	if($rankResult[$user['user_id']]['submit']== 0) continue;
+	$d[$i]+=$inc;
+	
+        }
+        // 两次微调结束
+        $i = 0;
+        foreach ($users as $user) {
+            $i++;
+            $old = $user['rating'] == NULL ? self::RATING_INIT_SCORE : $user['rating'];
+           $d[$i]=intval($d[$i]);
+            $newRating = $old+$d[$i];
+	    if($rankResult[$user['user_id']]['submit']== 0) continue;
             // echo $old . " " . $newRating . " " . ($newRating - $old) . "<br>";
             Yii::$app->db->createCommand()->update('{{%user}}', [
                 'rating' => $newRating
@@ -870,6 +914,7 @@ class Contest extends \yii\db\ActiveRecord
             ], ['user_id' => $user['user_id'], 'contest_id' => $this->id])->execute();
         }
     }
+
 
     /**
      * 是否有权限访问。用于限制比赛信息、问题、提交队列、榜单、答疑内容的访问，仅供管理员、参赛用户或比赛结束才能访问
