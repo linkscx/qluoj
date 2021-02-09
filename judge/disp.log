@@ -1,0 +1,49 @@
+localhost
+root
+Q2XUIQ^Y1VQabGmV
+jnoj
+3306
+2
+64
+-Xms64M
+-Xmx128M
+1
+0
+Main=Main.pystatus = 0
+init_call_counter:3
+localhost
+root
+Q2XUIQ^Y1VQabGmV
+jnoj
+3306
+2
+64
+-Xms64M
+-Xmx128M
+1
+0
+Main=Main.pystatus = 0
+init_call_counter:3
+pid=9347 [Solution ID: 1032] judging /home/judge/jnoj/judge/data/1000/0.in
+[ERROR] A not allowed system call.
+Call ID:257
+[ERROR] A not allowed system call.
+Call ID:257
+WTERMSIG=9
+{
+	"subtasks":	[{
+			"cases":	[{
+					"verdict":	10,
+					"time":	1,
+					"memory":	196,
+					"exit_code":	0,
+					"input":	"1 2",
+					"output":	"3",
+					"user_output":	"",
+					"checker_exit_code":	0,
+					"checker_log":	"Runtime Error:[ERROR] A not allowed system call.\nCall ID:257\nRuntime Error:[ERROR] A not allowed system call.\nCall ID:257"
+				}],
+			"score":	0
+		}]
+}
+[Solution ID: 1032] Result = 10

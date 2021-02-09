@@ -43,7 +43,7 @@ pre {
 }
 .logo .brand {
     color: #fff;
-    font-size: 22px;
+    font-size: 32px;
     float: left;
     padding-left: 10px;
     position: relative;
@@ -52,8 +52,7 @@ pre {
     margin-top: 15px;
     margin-left: 5px;
     overflow: hidden;
-    height: 55px;
-    line-height: 55px;
+    line-height: 85px;
 }
 #header {
     background-image: linear-gradient(to right, cyan , blue);
@@ -61,12 +60,11 @@ pre {
     border: medium none;
 }
 .page-header {
-    margin: 0;
+    margin: -10px 0 0 0;
     border-bottom: 0;
 }
 .page-header .navbar-brand img {
-    width: 178px;
-    height: 52px;
+    height: 100px;
 }
 .jumbotron {
     background-color: transparent;
