@@ -544,8 +544,8 @@ class Contest extends \yii\db\ActiveRecord
                     //$points = (int)$points;
                     $score = max(0.3*$points, $points-$decr * $sec / 60 - $result[$user]['wa_count'][$pid] * 50);
                     //$score=500;
-                    $result[$user]['ac_time'][$pid] = $score;
-                    $result[$user]['time'] += $score;
+                    $result[$user]['ac_time'][$pid] = intval($score);
+                    $result[$user]['time'] += intval($score);
                     
                 } else {
                     // 记录解答时间
@@ -838,7 +838,7 @@ class Contest extends \yii\db\ActiveRecord
             if ($user['rating']) {
                 foreach ($users as $u) {
                     if ($user['user_id'] != $u['user_id'] &&$rankResult[$u['user_id']]['submit']> 0) {
-                        $seed[$i] += 1.0 / (1.0 + pow(10, ($mid-($u['rating'] ? $u['rating'] : self::RATING_INIT_SCORE) )/400 ));
+                        $seed[$i] += 1.0 / (1.0 + pow(10, ($old-($u['rating'] ? $u['rating'] : self::RATING_INIT_SCORE) )/400 ));
                     }
                 }
             }
