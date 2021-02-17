@@ -213,6 +213,40 @@ class Solution extends ActiveRecord
         return $res;
     }
 
+    public function getResultPolygon()
+    {
+        $res = self::getResultList($this->result);
+        $loadingImgUrl = Yii::getAlias('@web/images/loading.gif');
+
+        if ($this->result <= Solution::OJ_WAITING_STATUS) {
+            $waitingHtmlDom = 'waiting="true"';
+            $loadingImg = "<img src=\"{$loadingImgUrl}\">";
+        } else {
+            $waitingHtmlDom = 'waiting="false"';
+            $loadingImg = "";
+        }
+        $innerHtml =  'data-verdict="' . $this->result . '" data-submissionid="' . $this->id . '" ' . $waitingHtmlDom;
+	//if($this->result!=Solution::OJ_AC) $res=$res.""." on test ".strval(intval($this->getPassedTestCount()+1));
+        // 定义各个测评状态的颜色
+        // https://v3.bootcss.com/css/#helper-classes
+        $cssClass = [
+            "text-muted", // Pending
+            "text-muted",
+            "text-muted",
+            "text-muted",
+            "text-success", // AC
+            "text-warning", // PE
+            "text-danger",  // WA
+            "text-warning", // TLE
+            "text-warning", // MLE
+            "text-warning", // OLE
+            "text-warning", // RE
+            "text-warning", // CE
+            "text-danger",  // SE
+            "text-danger", // No Test Data
+        ];
+        return "<strong class=" . $cssClass[$this->result] . " $innerHtml>{$res}{$loadingImg}</strong>";
+    }
     public function getResult()
     {
         $res = self::getResultList($this->result);

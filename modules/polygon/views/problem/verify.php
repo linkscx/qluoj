@@ -50,12 +50,12 @@ $solution->language = Yii::$app->user->identity->language;
             'value' => function ($model, $key, $index, $column) {
                 if ($model->result == Solution::OJ_CE || $model->result == Solution::OJ_WA
                     || $model->result == Solution::OJ_RE) {
-                    return Html::a($model->getResult(),
+                    return Html::a($model->getResultPolygon(),
                         ['/solution/result', 'id' => $model->id],
                         ['onclick' => 'return false', 'data-click' => "solution_info"]
                     );
                 } else {
-                    return $model->getResult();
+                    return $model->getResultPolygon();
                 }
             },
             'format' => 'raw'
