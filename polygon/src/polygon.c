@@ -103,7 +103,7 @@ void init_mysql_conf()
     sleep_time = 1;
     oj_tot = 1;
     oj_mod = 0;
-    strcpy(oj_lang_set, "0,1,2,3");
+    strcpy(oj_lang_set, "0,1,2,3,4,5");
     fp = fopen("./config.ini", "r");
     if (fp != NULL) {
         while (fgets(buf, BUFFER_SIZE - 1, fp)) {

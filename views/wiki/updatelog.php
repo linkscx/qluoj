@@ -1,6 +1,7 @@
 <h2>更新日志</h2>
 <hr>
 <p>在JNOJ的基础上，我校OJ开发组进行了如下更新</p>
+<p>更新日志位置: /home/judge/jnoj/views/wiki/updatelog.php</p>
 <p>[+]表示增添功能</p>
 <p>[&]表示修改、完善功能</p>
 <p>[- ]表示删除功能</p>
@@ -14,6 +15,13 @@
 <hr>
 <p>2021.07.24 by scx</p>
 <p>[+] 在Markdown编辑器中增加了上传PDF的功能，上传后自动在内容中追加打开PDF的超链接</p>
+<hr>
+<p>2021.02.17 by mhr</p>
+<p>[&] 把Polygon verify data界面修好了，能够正常使用了</p>
+<hr>
+<p>2021.02.05 by mhr</p>
+<p>[- ] 删除了之前的ELO计算方法</p> 
+<p>[+] 添加了新的基于Codeforces的ELO计算方法</p>
 <hr>
 <p>2021.02.03 by mhr</p>
 <p>[+] 在提交界面为每个提交添加了详细的在第几个测试数据错误</p>

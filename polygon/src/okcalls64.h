@@ -45,6 +45,8 @@ struct ok_call {
 struct ok_call ok_calls[] = {
 	{LANG_CV},
 	{LANG_CV},
+	{LANG_CV},
+	{LANG_CV},
 	{LANG_JV},
 	{LANG_YV}
 };

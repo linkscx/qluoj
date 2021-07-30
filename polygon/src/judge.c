@@ -571,7 +571,7 @@ struct problem_struct get_problem_info(int p_id)
     res = mysql_store_result(conn);
     row = mysql_fetch_row(res);
     problem.isspj = atoi(row[0]);
-    problem.spj_lang = LANG_CPP; //当前只支持C、C++语言的SPJ
+    problem.spj_lang = LANG_CPP11; //当前只支持C、C++语言的SPJ
     if (row[3]) {
         problem.solution_lang = atoi(row[3]);
     }
@@ -689,7 +689,7 @@ void run_solution(struct problem_struct problem, int lang, char * work_dir,
     // set the memory
     LIM.rlim_cur = STD_MB * problem.memory_limit / 2 * 3;
     LIM.rlim_max = STD_MB * problem.memory_limit * 2;
-    if (lang == LANG_C || lang == LANG_CPP)
+    if (lang == LANG_C || lang == LANG_CPP11 || lang == LANG_CPP14 || lang == LANG_CPP17)
         setrlimit(RLIMIT_AS, &LIM);
 
     // run solution
@@ -891,7 +891,7 @@ void watch_solution(struct problem_struct problem, pid_t pidApp, char * infile,
         //sig = status >> 8;/*status >> 8 EXITCODE*/
         if (WIFEXITED(status))
             break;
-        if ((lang == LANG_C || lang == LANG_CPP) && get_file_size("error.out")) {
+        if ((lang == LANG_C || lang == LANG_CPP11 || lang == LANG_CPP14 || lang == LANG_CPP17) && get_file_size("error.out")) {
             *ACflg = OJ_RE;
             addreinfo(solution_id);
             ptrace(PTRACE_KILL, pidApp, NULL, NULL);
@@ -1111,7 +1111,7 @@ int main(int argc, char** argv)
 
     //java is lucky
     // Clang Clang++ not VM or Script
-    if (lang >= 2) {
+    if (lang >= LANG_JAVA) {
         // the limit for java
         problem.time_limit = problem.time_limit + java_time_bonus;
         problem.memory_limit = problem.memory_limit + java_memory_bonus;
