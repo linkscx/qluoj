@@ -93,7 +93,7 @@ class Problem extends \yii\db\ActiveRecord
             'spj' => Yii::t('app', 'Special Judge'),
             'spj_lang' => Yii::t('app', 'Lang'),
             'spj_source' => Yii::t('app', 'Source'),
-            'hint' => Yii::t('app', 'Hint'),
+            'hint' => Yii::t('app', 'Hint: (题目源出处、个性化签名、解题小提示)'),
             'created_at' => Yii::t('app', 'Created At'),
             'created_by' => Yii::t('app', 'Created By'),
             'time_limit' => Yii::t('app', 'Time Limit'),

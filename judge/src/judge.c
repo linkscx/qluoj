@@ -515,6 +515,7 @@ void get_solution_info(int solution_id, int * p_id, int * lang)
 
     char sql[BUFFER_SIZE];
     // get the problem id and user id from Table:solution
+    
     sprintf(sql,
             "SELECT problem_id, language, source FROM solution "
             "WHERE id=%d", solution_id);
@@ -742,7 +743,8 @@ void run_solution(problem_struct problem, int lang, char * work_dir,
     // set the memory
     LIM.rlim_cur = STD_MB * problem.memory_limit / 2 * 3;
     LIM.rlim_max = STD_MB * problem.memory_limit * 2;
-    if (lang == LANG_C || lang == LANG_CPP)
+    //changed by scx -- CPP to CPP11/14/17
+    if (lang == LANG_C || lang == LANG_CPP11 || lang == LANG_CPP14 || lang == LANG_CPP17)
         setrlimit(RLIMIT_AS, &LIM);
 
     // run solution
@@ -934,7 +936,8 @@ void watch_solution(problem_struct problem,
         //sig = status >> 8;/*status >> 8 EXITCODE*/
         if (WIFEXITED(status))
             break;
-        if ((lang == LANG_C || lang == LANG_CPP) && get_file_size("error.out") && !oi_mode) {
+	//changed by scx -- CPP to CPP11/14/17
+        if ((lang == LANG_C || lang == LANG_CPP11 || lang == LANG_CPP14 || lang == LANG_CPP17) && get_file_size("error.out") && !oi_mode) {
             verdict_res->verdict = OJ_RE;
             ptrace(PTRACE_KILL, pidApp, NULL, NULL);
             break;
@@ -1336,7 +1339,7 @@ int main(int argc, char** argv)
 
     //java is lucky
     // Clang Clang++ not VM or Script
-    if (lang >= 2) {
+    if (lang >= LANG_JAVA) {
         // the limit for java
         problem.time_limit = problem.time_limit + java_time_bonus;
         problem.memory_limit = problem.memory_limit + java_memory_bonus;

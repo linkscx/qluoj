@@ -12,12 +12,13 @@ $this->title = 'Wiki';
     <div class="col-md-3">
         <?= Nav::widget([
             'items' => [
-                ['label' => Yii::t('app', 'OJ 信息'), 'url' => ['wiki/index']],
+                ['label' => Yii::t('app', 'OJ  Information'), 'url' => ['wiki/index']],
                 ['label' => Yii::t('app', 'Contest'), 'url' => ['wiki/contest']],
-                ['label' => '出题要求', 'url' => ['wiki/problem']],
+                ['label' => 'Requirements For Creating Problems', 'url' => ['wiki/problem']],
                 ['label' => Yii::t('app', 'Special Judge'), 'url' => ['wiki/spj']],
-                ['label' => Yii::t('app', 'OI 模式'), 'url' => ['wiki/oi']],
-                ['label' => Yii::t('app', 'About'), 'url' => ['wiki/about']]
+                ['label' => Yii::t('app', 'OI Mode'), 'url' => ['wiki/oi']],
+		['label' => Yii::t('app', 'About'), 'url' => ['wiki/about']],
+		['label' => 'Update Logs', 'url' => ['wiki/updatelog']]
             ],
             'options' => ['class' => 'nav nav-pills nav-stacked']
         ]) ?>

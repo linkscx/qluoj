@@ -50,8 +50,9 @@ class Uploader
         if (empty($config)) {
             $config = [
                 'savePath' => 'uploads/' ,             //存储文件夹
-                'maxSize' => 2048 ,//允许的文件最大尺寸，单位KB
-                'allowFiles' => ['.gif' , '.png' , '.jpg' , '.jpeg' , '.bmp'],  //允许的文件格式
+                'maxSize' => 4096 ,//允许的文件最大尺寸，单位KB
+		//changed by scx -- .pdf
+		'allowFiles' => ['.gif' , '.png' , '.jpg' , '.jpeg' , '.bmp', '.pdf'],  //允许的文件格式
             ];
         }
         $this->config = $config;

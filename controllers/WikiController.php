@@ -37,4 +37,8 @@ class WikiController extends BaseController
     {
         return $this->render('oi');
     }
+    public function actionUpdatelog()
+    {
+	return $this->render('updatelog');
+    }
 }

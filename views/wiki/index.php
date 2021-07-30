@@ -13,12 +13,24 @@
             <th>gcc Main.c -o Main -fno-asm -O2 -Wall -lm --static -std=c99 -DONLINE_JUDGE</th>
         </tr>
         <tr>
-            <th>C++</th>
+            <th>C++11</th>
             <th>g++ -fno-asm -O2 -Wall -lm --static -std=c++11 -DONLINE_JUDGE -o Main Main.cc</th>
+	</tr>
+	<tr>
+	    <th>C++14</th>
+	    <th>g++ -fno-asm -O2 -Wall -lm --static -std=c++14 -DONLINE_JUDGE -o Main Main.cc</th>
+	</tr>
+	<tr>
+            <th>C++17</th>
+            <th>g++ -fno-asm -O2 -Wall -lm --static -std=c++17 -DONLINE_JUDGE -o Main Main.cc</th>
         </tr>
         <tr>
             <th>Java</th>
-            <th>javac -J-Xms32m -J-Xmx256m Main.java </th>
+            <th>javac -J-Xms64m -J-Xmx128m -encoding UTF-8 Main.java </th>
+	</tr>
+        <tr>
+            <th>Python3</th>
+            <th>python3 -c import py_compile; py_compile.compile(r'Main.py')</th>
         </tr>
         </tbody>
     </table>

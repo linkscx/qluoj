@@ -16,6 +16,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
+//added by scx --UploadForm
+use app\modules\polygon\models\UploadForm;
+use yii\web\UploadedFile;
 
 /**
  * ProblemController implements the CRUD actions for Problem model.
@@ -153,7 +156,7 @@ class ProblemController extends Controller
             $fp = fopen($dataPath . '/spj.cc',"w");
             fputs($fp, $model->spj_source);
             fclose($fp);
-            exec("g++ -fno-asm -std=c++11 -O2 {$dataPath}/spj.cc -o {$dataPath}/spj -I" . Yii::getAlias('@app/libraries'));
+            exec("g++ -fno-asm -std=c++11 -O2 {$dataPath}/spj.cc -o {$dataPath}/spj");
             return $this->redirect(['spj', 'id' => $model->id]);
         }
         return $this->render('spj', [
@@ -304,7 +307,27 @@ class ProblemController extends Controller
         }
         die;
     }
-
+    //added by scx -- actionImport()
+    /**
+     *  导入问题页面
+     *  If update is successful, the browser will be redirected to the 'view' page.
+     *  @return mixed
+     */
+    public function actionImport()
+    {
+	    $this->layout = '/main';
+	    $model = new UploadForm();
+	    if (Yii::$app->request->isPost) {
+		    $model->problemFile = UploadedFile::getInstance($model, 'problemFile');
+		    if ($model->upload()) {
+			    Yii::$app->session->setFlash('success', Yii::t('app', 'Imported Successfully'));
+		    }
+		    return $this->refresh();
+	    }
+	    return $this->render('import', [
+		    'model' => $model,
+	    ]);
+    }
     /**
      * Creates a new Problem model.
      * If creation is successful, the browser will be redirected to the 'view' page.

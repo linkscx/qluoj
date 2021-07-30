@@ -62,7 +62,7 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'hint')->widget('app\widgets\editormd\Editormd') ?>
 
-    <?= $form->field($model, 'tags')->textarea(['maxlength' => true, 'placeholder' => '可不填'])
+    <?= $form->field($model, 'tags')->textarea(['maxlength' => true, 'placeholder' => '请标明题目考察的主要知识点'])
         ->hint('多标签用逗号隔开。如：dfs, bfs, dp, 暴力，贪心，最短路') ?>
 
     <div class="form-group">

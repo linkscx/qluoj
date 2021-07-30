@@ -55,9 +55,11 @@ class Solution extends ActiveRecord
     const OJ_NT  = 13;
 
     const CLANG = 0;
-    const CPPLANG = 1;
-    const JAVALANG = 2;
-    const PYLANG = 3;
+    const CPP11LANG = 1;
+    const CPP14LANG = 2;
+    const CPP17LANG = 3;
+    const JAVALANG = 4;
+    const PYLANG = 5;
 
     /**
      * @inheritdoc
@@ -86,8 +88,9 @@ class Solution extends ActiveRecord
             [['problem_id', 'created_by', 'time', 'memory', 'result', 'language', 'contest_id', 'status',
               'code_length', 'score'], 'integer'],
             [['created_at', 'judgetime'], 'safe'],
-            [['language', 'source'], 'required'],
-            [['language'], 'in', 'range' => [0, 1, 2, 3], 'message' => 'Please select a language'],
+	    [['language', 'source'], 'required'],
+	    //changed by scx -- [0, 1, 2, 3] to [0, 1, 2, 3, 4, 5]
+            [['language'], 'in', 'range' => [0, 1, 2, 3, 4, 5], 'message' => 'Please select a language'],
             [['source', 'pass_info'], 'string'],
             [['judge'], 'string', 'max' => 16],
         ];
@@ -138,10 +141,11 @@ class Solution extends ActiveRecord
             if ($this->isNewRecord) {
                 $this->created_by = Yii::$app->user->id;
                 $this->code_length = strlen($this->source);
-            }
+	    }
             return true;
         } else {
             return false;
+
         }
     }
 
@@ -170,9 +174,16 @@ class Solution extends ActiveRecord
             case Solution::CLANG:
                 $res = 'C';
                 break;
-            case Solution::CPPLANG:
-                $res = 'C++';
-                break;
+	    //changed by scx -- CPP to CPP 11/14/17 
+	    case Solution::CPP11LANG:
+                $res = 'C++11';
+		break;
+	    case Solution::CPP14LANG:
+		$res = 'C++14';
+		break;
+	    case Solution::CPP17LANG:
+		$res = 'C++17';
+		break;
             case Solution::JAVALANG:
                 $res = 'Java';
                 break;
@@ -193,13 +204,20 @@ class Solution extends ActiveRecord
      */
     public static function getLangFileExtension($lang)
     {
+	//changed by scx -- CPP to CPP11/14/17
         switch ($lang) {
             case Solution::CLANG:
                 $res = 'c';
                 break;
-            case Solution::CPPLANG:
+            case Solution::CPP11LANG:
                 $res = 'cpp';
-                break;
+		break;
+	    case Solution::CPP14LANG:
+		$res = 'cpp';
+		break;
+	    case Solution::CPP17LANG:
+		$res = 'cpp';
+		break;
             case Solution::JAVALANG:
                 $res = 'java';
                 break;
@@ -306,12 +324,15 @@ class Solution extends ActiveRecord
 
     public static function getLanguageList($status = '')
     {
+	//changed by scx -- C++ to C++11/14/17
         $arr = [
             '' => 'All',
             '0' => 'C',
-            '1' => 'C++',
-	    '2' => 'Java',
-	    '3' => 'Python3'
+	    '1' => 'C++11',
+	    '2' => 'C++14',
+	    '3' => 'C++17',
+	    '4' => 'Java',
+	    '5' => 'Python3'
         ];
         return $status === '' ? $arr : $arr[$status];
     }

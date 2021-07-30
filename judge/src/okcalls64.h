@@ -21,16 +21,17 @@ int LANG_CV[256] = {0,1,2,3,4,5,8,9,10,11,12,20,21,59,63,89,99,158,202,231,240,2
                     		SYS_close, SYS_execve, SYS_access, SYS_brk, SYS_munmap, SYS_mprotect,
                     		SYS_mmap, SYS_fstat, SYS_set_thread_area, 252, SYS_arch_prctl, 0 };
 //java
-int LANG_JV[256] = {0};
-/*int LANG_JV[256] = {0,2,3,4,5,9,10,11,12,13,14,17,21,56,59,89,97,104,157,158,202,218,231,273,257,
+//int LANG_JV[256] = {0};
+int LANG_JV[256] = {0,2,3,4,5,9,10,11,12,13,14,17,21,56,59,89,97,104,157,158,202,218,231,273,257,
 		61, 22, 6, 33, 8, 13, 16, 111, 110, 39, 79, 302, SYS_fcntl,
 		SYS_getdents64, SYS_getrlimit, SYS_rt_sigprocmask, SYS_futex, SYS_read,
 		SYS_mmap, SYS_stat, SYS_open, SYS_close, SYS_execve, SYS_access,
 		SYS_brk, SYS_readlink, SYS_munmap, SYS_close, SYS_uname, SYS_clone,
 		SYS_uname, SYS_mprotect, SYS_rt_sigaction, SYS_getrlimit, SYS_fstat,
 		SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_set_thread_area,
-		SYS_set_tid_address, SYS_set_robust_list, SYS_exit_group, 158, 0 };*/
+		SYS_set_tid_address, SYS_set_robust_list, SYS_exit_group, 158, 0 };
 //python
+// 修改人: 18级老队员
 // 因为包含了部分危险的系统调用，暂且禁用之
 int LANG_YV[256] = {0};
 /*int LANG_YV[256] = {0,2,3,4,5,6,8,9,10,11,12,13,14,16,17,21,32,59,72,78,79,89,97,99,102,104,107,108,131,158,186,217,218,228,231,272,273,318,39,99,302,99,32,72,131,1,202,257,41, 42, 146, SYS_mremap, 158, 117, 60, 39, 102, 191,
@@ -45,7 +46,10 @@ int LANG_YV[256] = {0};
 struct ok_call {
 	int * call;
 };
+//add by scx -- 加了两个LANG_CV
 struct ok_call ok_calls[] = {
+	{LANG_CV},
+	{LANG_CV},
 	{LANG_CV},
 	{LANG_CV},
 	{LANG_JV},

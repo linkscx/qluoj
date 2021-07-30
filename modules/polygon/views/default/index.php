@@ -28,6 +28,8 @@ $this->title = Yii::t('app', 'Polygon System');
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Problem'), ['/polygon/problem/create'], ['class' => 'btn btn-success']) ?>
+	<!-- added by scx -->
+	<?= Html::a(Yii::t('app', 'Import Problem'), ['/polygon/problem/import'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo $this->render('/problem/_search', ['model' => $searchModel]); ?>

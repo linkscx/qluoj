@@ -36,9 +36,30 @@ class Editormd extends InputWidget
     public function run()
     {
         $this->_options = [
-            'placeholder' => 'hint',
+            'placeholder' => '请输入......',
             'height' => 300,
-            'imageUpload' => true,
+	    'imageUpload' => true,
+
+	    //added by scx -- [begin]
+	    'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp", "pdf"],
+	    'toolbarIconsClass' => ['image' => "fa-file-image-o"],
+	    'lang' => [
+                'toolbar' => ['image' => "添加图片/PDF"],
+		'dialog' => [
+			'image' => [
+			    'title'    => "添加图片/PDF",
+			    'url'      => "文件地址",
+			    'link'      => "文件链接",
+			    'alt'       => "文件描述",
+			    'uploadButton'      => "本地上传",
+			    'imageURLEmpty'     => "错误：图片/PDF地址不能为空。",
+			    'uploadFileEmpty'   => "错误：上传的图片/PDF不能为空。",
+			    'formatNotAllowed'  => "错误：只允许上传图片/PDF文件，允许上传的文件格式有："
+			]
+		]
+	    ],
+	    //added by scx -- [end]
+
             'tex' => true,
             'flowChart' => true,
             'sequenceDiagram' => true,

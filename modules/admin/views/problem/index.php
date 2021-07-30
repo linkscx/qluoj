@@ -17,7 +17,8 @@ $this->title = Yii::t('app', 'Problems');
     <p>
         <?= Html::a(Yii::t('app', 'Create Problem'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Polygon Problem'), ['create-from-polygon'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Import Problem'), ['import'], ['class' => 'btn btn-success']) ?>
+	<!-- deleted by scx -->
+	<!-- Html::a(Yii::t('app', 'Import Problem'), ['import'], ['class' => 'btn btn-success']) -->
     </p>
     <hr>
     <p>

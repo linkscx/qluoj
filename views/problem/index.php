@@ -65,6 +65,10 @@ $this->title = Yii::t('app', 'Problems');
                     'options' => ['width' => '100px']
                 ]
             ],
+           'pager' => [//自定义分页样式
+                'firstPageLabel' => 'First',
+                'lastPageLabel' => 'Last'
+            ]
         ]); ?>
     </div>
     <div class="col-md-3">
