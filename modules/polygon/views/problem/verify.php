@@ -19,7 +19,7 @@ $solution->language = Yii::$app->user->identity->language;
 <p>
     该页面用于给验题人验证题目数据的准确性，验题前需在
     <?= Html::a(Yii::t('app', 'Tests Data'), ['/polygon/problem/tests', 'id' => $model->id]) ?>
-    页面中生成标程的标准输出文件。
+    页面中上传/生成标程的标准输入输出文件。
 </p>
 <p>
      本功能目前存在bug，提交程序后有概率一直处于Pending状态，待修复。所以建议在联系管理员把题目导入题库后，提交一次标程来当作验题。

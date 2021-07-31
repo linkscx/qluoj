@@ -147,7 +147,7 @@ class ProblemController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->spj_lang = Solution::CPPLANG;
+            $model->spj_lang = Solution::CPP11LANG;
             $model->save();
             $dataPath = Yii::$app->params['polygonProblemDataPath'] . $model->id;
             if (!is_dir($dataPath)) {
@@ -156,7 +156,7 @@ class ProblemController extends Controller
             $fp = fopen($dataPath . '/spj.cc',"w");
             fputs($fp, $model->spj_source);
             fclose($fp);
-            exec("g++ -fno-asm -std=c++11 -O2 {$dataPath}/spj.cc -o {$dataPath}/spj");
+	    exec("g++ -std=c++11 -O2 $dataPath/spj.cc -o $dataPath/spj");
             return $this->redirect(['spj', 'id' => $model->id]);
         }
         return $this->render('spj', [
