@@ -3,7 +3,7 @@
     <br>
 </p>
 
-QLUOJ是一款基于JNOJ开发的OJ   
+QLUOJ是一款基于JNOJ开发的OJ，由我校OJ开发组进行维护和二次开发。   
 ![image](https://user-images.githubusercontent.com/86877361/127628167-7990e8b9-c23e-4f54-97ce-2acd22f837a0.png)
 
 
@@ -15,6 +15,10 @@ QLUOJ是一款基于JNOJ开发的OJ
 
 [&] 表示为修改功能   
 ----------  
+
+2021.08.02
+
+[&] 修复了SPJ保存时不自动编译的问题
 
 2021.07.29
 

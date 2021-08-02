@@ -6,6 +6,9 @@
 <p>[&]表示修改、完善功能</p>
 <p>[- ]表示删除功能</p>
 <hr>
+<p>2021.08.02</p>
+<p>[&] 修复了SPJ保存时不自动编译的问题</p>
+<hr>
 <p>2021.07.29 by scx</p>
 <p>[+] 在Polygon系统中，显示Import Problem功能，增加了对从domjudge导出题目类型(.zip)的上传支持，也支持上传自行构建的zip题目压缩包</p>
 <p>[- ] 删除了管理员后台的Import Problem接口，使Import Problem只在Polygon中显示，并且导入题目路径重定向至Polygon文件夹</p>
