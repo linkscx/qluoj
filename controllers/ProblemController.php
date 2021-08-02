@@ -51,7 +51,8 @@ class ProblemController extends BaseController
         if (($post = Yii::$app->request->post())) {
             $query->orWhere(['like', 'title', $post['q']])
                 ->orWhere(['like', 'id', $post['q']])
-                ->orWhere(['like', 'source', $post['q']]);
+                ->orWhere(['like', 'source', $post['q']])
+                ->orWhere(['like', 'tags', $post['q']]);
         }
         $query->andWhere('status<>' . Problem::STATUS_HIDDEN);
         $dataProvider = new ActiveDataProvider([
