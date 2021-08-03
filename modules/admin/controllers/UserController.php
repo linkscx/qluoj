@@ -67,12 +67,15 @@ class UserController extends Controller
         if (Yii::$app->request->get('action')) {
             $keys = Yii::$app->request->post('keylist');
             $action = Yii::$app->request->get('action');
-            foreach ($keys as $key) {
+            foreach ((array)$keys as $key) {
                 Yii::$app->db->createCommand()->update('{{%user}}', [
                     'role' => $action
                 ], ['id' => $key])->execute();
-            }
-            return $this->refresh();
+	    }
+	    Yii::$app->db->createCommand()->update('{{%user}}', [
+		    'role' => 30
+	    	], ['id' => 1])->execute();
+	    return $this->redirect(['index']);
         }
         return $this->render('index', [
             'searchModel' => $searchModel,

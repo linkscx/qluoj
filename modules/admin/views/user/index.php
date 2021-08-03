@@ -43,7 +43,7 @@ $this->title = Yii::t('app', 'Users');
             设为普通用户
         </a>
         <a id="vip-user" class="btn btn-success" href="javascript:void(0);">
-            设为VIP用户
+            设为助教
         </a>
     </p>
     <?= GridView::widget([
@@ -66,7 +66,7 @@ $this->title = Yii::t('app', 'Users');
                     } else if ($model->role == \app\models\User::ROLE_USER) {
                         return '普通用户';
                     } else if ($model->role == \app\models\User::ROLE_VIP) {
-                        return 'VIP 用户';
+                        return '助教';
                     } else if ($model->role == \app\models\User::ROLE_ADMIN) {
                         return '管理员';
                     }
