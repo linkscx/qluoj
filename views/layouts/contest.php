@@ -66,7 +66,10 @@ $status = $model->getRunStatus();
     } else {
         if (Yii::$app->user->identity->role == \app\models\User::ROLE_ADMIN) {
             $menuItems[] = ['label' => Yii::t('app', 'Backend'), 'url' => ['/admin']];
-        }
+	}
+	if (Yii::$app->user->identity->role == \app\models\User::ROLE_VIP) {
+	    $menuItems[] = ['label' => Yii::t('app', 'Backend'), 'url' => ['/vip']];
+	}
         $menuItems[] = [
             'label' => Yii::$app->user->identity->nickname,
             'items' => [

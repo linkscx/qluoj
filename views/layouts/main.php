@@ -86,7 +86,14 @@ AppAsset::register($this);
                 'url' => ['/admin'],
                 'active' => Yii::$app->controller->module->id == 'admin'
             ];
-        }
+	}
+	if (Yii::$app->user->identity->isVip()) {
+	    $menuItems[] = [
+		'label' => '<span class="glyphicon glyphicon-cog"></span> ' . Yii::t('app', 'Backend'),
+		'url' => ['/vip'],
+		'active' => Yii::$app->controller->module->id == 'vip'
+	    ];
+	}
         $menuItems[] =  [
             'label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::$app->user->identity->nickname,
             'items' => [

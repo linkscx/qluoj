@@ -20,7 +20,10 @@ $config = [
         ],
         'polygon' => [
             'class' => 'app\modules\polygon\Module',
-        ],
+    	],
+	'vip' => [
+	    'class' => 'app\modules\vip\VipModule',
+    	],
     ],
     'components' => [
         'formatter' => $params['components.formatter'],
