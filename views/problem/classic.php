@@ -98,6 +98,9 @@ $nextProblemID = $model->getNextProblemID();
     <?php $this->endCache(); ?>
     <?php endif; ?>
     <div class="col-md-3 problem-info">
+	<div>
+	    <?= Html::a('新版界面', ['/problem/view', 'id' => $model->id]) ?>
+	</div>
         <div class="panel panel-default">
             <!-- Table -->
             <table class="table">

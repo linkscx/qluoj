@@ -268,7 +268,7 @@ $nextProblemID = $model->getNextProblemID();
                 <div class="problem-footer">
                     <?php
                     if (Yii::$app->user->isGuest) {
-                        echo '<span>请先登陆</span>';
+                        echo '<span>请先登录</span>';
                     } else {
                         echo Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary']);
                     }
