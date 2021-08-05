@@ -33,6 +33,7 @@ tests/_support/_generated
 
 #judge
 /judge/?
+/judge/??
 /judge/run
 /judge/etc/*
 /judge/log/*
@@ -40,6 +41,7 @@ tests/_support/_generated
 
 #polygon
 /polygon/?
+/polygon/??
 /polygon/run/*
 /polygon/data/*
 
