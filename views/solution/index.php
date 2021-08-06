@@ -18,6 +18,10 @@ $this->title = Yii::t('app', 'Status');
         'dataProvider' => $dataProvider,
         'options' => ['class' => 'table-responsive'],
         'tableOptions' => ['class' => 'table table-striped table-bordered'],
+        'pager' => [//自定义分页样式
+                'firstPageLabel' => 'First',
+                'lastPageLabel' => 'Last'
+        ],
         'columns' => [
             [
                 'attribute' => 'id',
@@ -91,7 +95,7 @@ $this->title = Yii::t('app', 'Status');
                 },
                 'format' => 'raw'
             ],
-            'code_length',
+             'code_length',
             [
                 'attribute' => 'created_at',
                 'value' => function ($model, $key, $index, $column) {

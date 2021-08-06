@@ -20,6 +20,10 @@ $this->title = Yii::t('app', 'Problems');
             'layout' => '{items}{pager}',
             'dataProvider' => $dataProvider,
             'options' => ['class' => 'table-responsive problem-index-list'],
+           'pager' => [//自定义分页样式
+                'firstPageLabel' => 'First',
+                'lastPageLabel' => 'Last'
+            ],
             'columns' => [
                 [
                     'attribute' => 'id',
@@ -64,10 +68,6 @@ $this->title = Yii::t('app', 'Problems');
                     'format' => 'raw',
                     'options' => ['width' => '100px']
                 ]
-            ],
-           'pager' => [//自定义分页样式
-                'firstPageLabel' => 'First',
-                'lastPageLabel' => 'Last'
             ]
         ]); ?>
     </div>
