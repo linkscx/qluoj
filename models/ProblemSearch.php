@@ -16,7 +16,7 @@ class ProblemSearch extends Problem
     public function rules()
     {
         return [
-            [['id', 'time_limit', 'memory_limit', 'accepted', 'submit', 'solved'], 'integer'],
+            [['id', 'time_limit', 'memory_limit', 'accepted', 'submit', 'solved', 'polygon_problem_id'], 'integer'],
             [['title', 'description', 'input', 'output', 'sample_input', 'sample_output', 'spj', 'hint', 'source', 'created_at', 'status'], 'safe'],
         ];
     }
@@ -66,7 +66,8 @@ class ProblemSearch extends Problem
             'memory_limit' => $this->memory_limit,
             'accepted' => $this->accepted,
             'submit' => $this->submit,
-            'solved' => $this->solved,
+	    'solved' => $this->solved,
+	    'polygon_problem_id' => $this->polygon_problem_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

@@ -30,6 +30,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'source', [
         'template' => "{label}\n<div class=\"input-group\"><span class=\"input-group-addon\">来源</span>{input}</div>",
     ])->textInput(['maxlength' => 128, 'autocomplete'=>'off', 'placeholder' => Yii::t('app', 'Source')])->label(false) ?>
+    <?= $form->field($model, 'polygon_problem_id', [
+	'template' => "{label}\n<div class=\"input-group\"><span class=\"input-group-addon\">Polygon ID</span>{input}</div>",
+    ])->textInput(['maxlength' => 128, 'autocomplete'=>'off', 'placeholder' => Yii::t('app', 'Polygon ID')])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
