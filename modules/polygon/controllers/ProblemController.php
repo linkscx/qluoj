@@ -433,7 +433,8 @@ class ProblemController extends Controller
     {
         if (($model = Problem::findOne($id)) !== null) {
             if (Yii::$app->user->id === $model->created_by ||
-                Yii::$app->user->identity->role === User::ROLE_ADMIN) {
+		    Yii::$app->user->identity->role === User::ROLE_ADMIN||
+	    	    Yii::$app->user->identity->role === User::ROLE_VIP) {
                 return $model;
             } else {
                 throw new ForbiddenHttpException('You are not allowed to perform this action.');
