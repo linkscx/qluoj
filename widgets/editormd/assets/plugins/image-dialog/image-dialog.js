@@ -51,7 +51,7 @@
                                         "<label>" + imageLang.url + "</label>" +
                                         "<input type=\"text\" data-url />" + (function(){
                                             return (settings.imageUpload) ? "<div class=\"" + classPrefix + "file-input\">" +
-                                                                                "<input type=\"file\" name=\"" + classPrefix + "image-file\" accept=\"image/jpg,image/jpeg,image/gif,image/png,image/bmp,image/webp\" />" +
+                                                                                "<input type=\"file\" name=\"" + classPrefix + "image-file\" accept=\"image/jpg,image/jpeg,application/pdf,image/gif,image/png,image/bmp,image/webp\" />" +
                                                                                 "<input type=\"submit\" value=\"" + imageLang.uploadButton + "\" />" +
                                                                             "</div>" : "";
                                         })() +
@@ -92,7 +92,11 @@
                             }
 
 							var altAttr = (alt !== "") ? " \"" + alt + "\"" : "";
-
+			    if(url.endsWith(".pdf")//add by scx
+			    {
+			    	cm.replaceSelection("\n#### [PDF](" + url + altAttr + ")");
+			    }
+			    else
                             if (link === "" || link === "http://")
                             {
                                 cm.replaceSelection("![" + alt + "](" + url + altAttr + ")");
