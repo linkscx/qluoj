@@ -91,8 +91,8 @@
                                 return false;
                             }
 
-							var altAttr = (alt !== "") ? " \"" + alt + "\"" : "";
-			    if(url.endsWith(".pdf")//add by scx
+			    var altAttr = (alt !== "") ? " \"" + alt + "\"" : "";
+			    if(url.endsWith(".pdf"))
 			    {
 			    	cm.replaceSelection("\n#### [PDF](" + url + altAttr + ")");
 			    }
