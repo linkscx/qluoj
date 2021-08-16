@@ -107,11 +107,12 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 <?php
 $json = $model->solutionInfo->run_info;
+$json = str_replace("&", "&#38;", $json);
 $json = str_replace("<", "&lt;", $json);
 $json = str_replace(">", "&gt;", $json);
 $json = str_replace(PHP_EOL,"<br>",$json);
 $json = str_replace("\\n","<br>",$json);
-$json = str_replace("'","\'",$json);
+$json = str_replace("'", "&#39;", $json);
 $json = str_replace("\\r", "", $json);
 $json = str_replace("\\", "\\\\", $json);
 $oiMode = Yii::$app->setting->get('oiMode');
