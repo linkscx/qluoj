@@ -18,6 +18,10 @@
 
 - - -
 
+2021.08.19
+
+	[&] 修复了Status界面查看run-info时，测试数据太多无法将run-info插入数据库，导致run-info无法正常显示的问题，把数据库中solution_info表的run_info属性类型改成了longtext
+
 2021.08.15
 
 	[&] 修复了Status界面查看run-info时，测试数据中包含转义字符因而返回的json数据格式错误，导致run-info无法正常显示的问题
