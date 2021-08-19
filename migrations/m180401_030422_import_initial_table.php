@@ -183,7 +183,7 @@ class m180401_030422_import_initial_table extends BaseMigration
 
         $this->createTable('{{%solution_info}}', [
             'solution_id' => $this->integer()->notNull(),
-            'error' => $this->longtext()
+            'error' => $this->text()
         ], $this->tableOptions);
 
         $this->createTable('{{%polygon_problem}}', [
