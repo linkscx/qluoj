@@ -29,7 +29,7 @@ if (!$model->canViewErrorInfo()) {
         $json = str_replace(">", "&gt;", $json);
         $json = str_replace(PHP_EOL,"<br>",$json);
         $json = str_replace("\\n","<br>",$json);
-        $json = str_replace("'","&#39;",$json);
+	$json = str_replace("'","&#39;",$json);
 	$json = str_replace("\\r", "", $json);
 	$json = str_replace("\\", "\\\\", $json);
         ?>
