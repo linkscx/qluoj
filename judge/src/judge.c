@@ -341,8 +341,7 @@ void update_solution_info(int solution_id, char * buf)
     char *tmp = (char *)malloc(sizeof(char) * (2 * len + 1));
     mysql_real_escape_string(conn, tmp, buf, len);
     sprintf(sql,
-            "INSERT INTO `solution_info`(`solution_id`, `run_info`) VALUES(%d, '%s') "
-            "ON DUPLICATE KEY UPDATE `run_info`='%s'",
+            "INSERT INTO `solution_info`(`solution_id`, `run_info`) VALUES(%d,'%s') ON DUPLICATE KEY UPDATE `run_info`='%s'",
             solution_id, tmp, tmp);
     if (mysql_real_query(conn, sql, strlen(sql)))
         write_log(mysql_error(conn));

@@ -257,11 +257,28 @@ class ProblemController extends Controller
             $fromId = Yii::$app->request->post('polygon_problem_id_from');
             $toId = Yii::$app->request->post('polygon_problem_id_to');
             if (!empty($id)) {
-                if ($this->synchronizeProblemFromPolygon($id)) {
-                    Yii::$app->session->setFlash('success', $id . ' created Successfully.');
-                } else {
-                    Yii::$app->session->setFlash('error', $id . ' no such problem.');
+                $each_id = explode(',', $id);
+                $succ_id = '';
+                $err_id = '';
+                for($index=0; $index < count($each_id); $index++) {
+                        if($this->synchronizeProblemFromPolygon($each_id[$index])) {
+                                if(empty($succ_id)){
+                                        $succ_id .= $each_id[$index];
+                                }else
+                                {
+                                        $succ_id .= ',' . $each_id[$index];
+                                }
+                        }else{
+                                if(empty($err_id)){
+                                        $err_id .= $each_id[$index];
+                                }else
+                                {
+                                        $err_id .= ',' . $each_id[$index];
+                                }
+                        }
                 }
+                if(!empty($succ_id))Yii::$app->session->setFlash('success', 'Problem ID :' . $succ_id . ', created successfully. ');
+		if(!empty($err_id))Yii::$app->session->setFlash('error', 'Problem ID :' . $err_id . ', no such problem.');
             } else if (!empty($fromId) && !empty($toId)) {
                 $fromId = intval($fromId);
                 $toId = intval($toId);

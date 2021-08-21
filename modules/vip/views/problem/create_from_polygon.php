@@ -16,12 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr>
     <?= Html::beginForm() ?>
     <div class="form-group">
-        <p>单个添加</p>
+        <p>单个添加/多个添加</p>
         <div class="input-group">
             <span class="input-group-addon" id="polygon_problem_id"><?= Yii::t('app', 'Polygon Problem ID') ?></span>
             <?= Html::textInput('polygon_problem_id', '', ['class' => 'form-control']) ?>
         </div>
-        <p class="help-block">请提供位于 <?= Html::a(Yii::t('app', 'Polygon System'), ['/polygon/problem']) ?> 问题对应 ID</p>
+        <p class="help-block">请提供位于 <?= Html::a(Yii::t('app', 'Polygon System'), ['/polygon/problem']) ?> 问题对应 ID, 以英文逗号(,)隔开</p>
     </div>
 
     <div class="form-group">
