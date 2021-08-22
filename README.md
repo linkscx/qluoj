@@ -3,9 +3,10 @@
     <br>
 </p>
 
-### 介绍
+### 介绍 | [![svg](https://img.shields.io/badge/Github-QLUOJ-green.svg)](https://github.com/linkscx/qluoj)
 
-	QLUOJ是一款基于JNOJ开发的OJ，由我校OJ开发组进行维护和二次开发。   
+	QLUOJ是一款基于JNOJ开发的OJ，由我校OJ开发组进行维护和二次开发。
+
 <img src="https://user-images.githubusercontent.com/86877361/127628167-7990e8b9-c23e-4f54-97ce-2acd22f837a0.png" width=800px height=450px>
 
 ### 更新日志  
@@ -105,6 +106,15 @@
 	[&] 修改了积分的算分算法  
 	[&] 把user主界面的rating图调出来了  
 
+
+### 帮助文档
+
+----------
+
+1. [安装教程](https://github.com/linkscx/qluoj/blob/master/docs/install.md)
+2. [更新教程](https://github.com/linkscx/qluoj/blob/master/docs/update.md)
+3. [JNOJ作者Wiki](https://github.com/shi-yang/jnoj/wiki)
+4. [Centos下安装出现的问题及解决方法](https://blog.csdn.net/qq_45530271/article/details/119842371)
 
 ### 目录结构  
 
