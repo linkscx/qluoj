@@ -19,6 +19,10 @@
 - - -
 
 2021.08.22
+	
+	[&] 完善了Polygon-Create Problem界面中Description,Tags,Hint的标签和提示
+
+2021.08.21
 
 	[+] 为管理员和助教在导入Polygon题目到题库时，增加了“多个添加”的方法
 
