@@ -89,7 +89,7 @@ class Problem extends ActiveRecord
         return [
             'id' => Yii::t('app', 'Problem ID'),
             'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
+            'description' => Yii::t('app', 'Description: (请尽可能使用PDF文件的方式进行录入; 对于套题整体的PDF文件，请将其拆分为单个题目的独立PDF文件)'),
             'input' => Yii::t('app', 'Input'),
             'output' => Yii::t('app', 'Output'),
             'sample_input' => Yii::t('app', 'Sample Input'),
@@ -99,7 +99,7 @@ class Problem extends ActiveRecord
             'sample_input_3' => Yii::t('app', 'Sample Input 3'),
             'sample_output_3' => Yii::t('app', 'Sample Output 3'),
             'spj' => Yii::t('app', 'Special Judge'),
-            'hint' => Yii::t('app', 'Hint'),
+            'hint' => Yii::t('app', 'Hint: (题目源出处、个性化签名、解题小提示)'),
             'source' => Yii::t('app', 'Source'),
             'created_at' => Yii::t('app', 'Created At'),
             'time_limit' => Yii::t('app', 'Time Limit'),

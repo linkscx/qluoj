@@ -72,8 +72,9 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'source')->textarea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tags')->textarea(['maxlength' => true, 'placeholder' => '可不填'])
-        ->hint('多标签用逗号隔开。如：dfs, bfs, dp, 暴力，贪心，最短路') ?>
+    <?= $form->field($model, 'tags')->textarea(['maxlength' => true, 'placeholder' => '请标明题目考察的主要知识点'])
+        ->hint('请为题目添加知识点标签。多标签用半角的逗号隔开。<br>如果是入门简单题，请填：C语言入门；如果是数据结构题，请填数据结构的名字；如果是某个算法，请填算法的名字；如果是成套的比
+赛题，请填套题的名字。<br>示例：C语言入门,栈,dfs,bfs,dp,暴力,贪心,最短路,2021牛客暑期多校训练营10') ?>
 
     <?= $form->field($model, 'contest_id')->dropDownList(\app\models\Contest::getContestList()) ?>
 
