@@ -187,9 +187,9 @@ $status = $model->getRunStatus();
                     'options' => ['class' => 'nav nav-tabs hidden-print'],
                     'encodeLabels' => false
                 ]) ?>
-                <?php \yii\widgets\Pjax::begin() ?>
+                <?php //\yii\widgets\Pjax::begin() ?>
                 <?= $content ?>
-                <?php \yii\widgets\Pjax::end() ?>
+                <?php //\yii\widgets\Pjax::end() ?>
             </div>
         <?php endif; ?>
     </div>
