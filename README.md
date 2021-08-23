@@ -21,6 +21,7 @@
 
 2021.08.23
 
+	[&] 优化了Contest-Problem提交代码的排版
 	[&] 修复了Contest浏览题目时因为使用Pjax导致PDF无法跳转打开（取消Contest界面使用Pjax）
 	[&] 更改了大部分页面的title(添加了 - OJName字样)；更改了Wiki默认页面
 
