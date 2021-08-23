@@ -131,7 +131,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->setting->get('ojName') ?> OJ <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->setting->get('ojName') ?> <?= date('Y') ?></p>
         <p class="pull-left">
         </p>
     </div>

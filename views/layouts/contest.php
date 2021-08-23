@@ -43,7 +43,7 @@ $status = $model->getRunStatus();
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->setting->get('ojName') . ' OJ',
+        'brandLabel' => Yii::$app->setting->get('ojName'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default',
@@ -197,7 +197,7 @@ $status = $model->getRunStatus();
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->setting->get('ojName') ?> OJ <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->setting->get('ojName') ?> <?= date('Y') ?></p>
         <p class="pull-left">
             <?= Html::a (' 中文简体 ', '?lang=zh-CN') . '| ' .
             Html::a (' English ', '?lang=en') ;
