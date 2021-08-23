@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel app\modules\polygon\models\ProblemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Polygon System');
+$this->title = Yii::t('app', 'Polygon System' . ' - ' .  Yii::$app->setting->get('ojName'));
 ?>
 <h2><?= $this->title ?></h2>
 <p><?= Yii::t('app', 'Professional way to prepare programming contest problem') ?></p>

@@ -19,6 +19,10 @@
 
 - - -
 
+2021.08.23
+
+	[&] 更改了大部分页面的title(添加了 - OJName字样)；更改了Wiki默认页面
+
 2021.08.22
 	
 	[&] 完善了Polygon-Create Problem界面中Description,Tags,Hint的标签和提示

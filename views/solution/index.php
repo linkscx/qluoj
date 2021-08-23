@@ -8,7 +8,7 @@ use yii\bootstrap\Modal;
 /* @var $searchModel app\models\SolutionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Status');
+$this->title = Yii::t('app', 'Status' . ' - ' .  Yii::$app->setting->get('ojName'));
 ?>
 <div class="solution-index">
     <?php Pjax::begin() ?>

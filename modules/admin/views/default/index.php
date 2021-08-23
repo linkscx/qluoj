@@ -1,5 +1,5 @@
 <?php
-$this->title = "Admin";
+$this->title = "Backend" . ' - ' .  Yii::$app->setting->get('ojName');
 function __($message)
 {
     $messages = array(

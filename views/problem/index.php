@@ -10,7 +10,7 @@ use justinvoelker\tagging\TaggingWidget;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $solvedProblem array */
 
-$this->title = Yii::t('app', 'Problems');
+$this->title = Yii::t('app', 'Problems' . ' - ' .  Yii::$app->setting->get('ojName'));
 ?>
 <div class="row">
 

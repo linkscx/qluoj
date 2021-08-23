@@ -10,7 +10,7 @@ use app\models\User;
 
 use yii\helpers\Html;
 
-$this->title = Yii::t('app', 'Rating');
+$this->title = Yii::t('app', 'Rating' . ' - ' .  Yii::$app->setting->get('ojName'));
 ?>
 <p style="text-align: center">
     ★<?= Html::a('题数排行', ['problem']) ?>

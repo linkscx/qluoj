@@ -8,7 +8,7 @@ use app\models\Contest;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Contests');
+$this->title = Yii::t('app', 'Contests' . ' - ' .  Yii::$app->setting->get('ojName'));
 ?>
 <div class="contest-index">
 

@@ -69,7 +69,7 @@ AppAsset::register($this);
         ],
         ['label' => '<span class="glyphicon glyphicon-knight"></span> ' . Yii::t('app', 'Contests'), 'url' => ['/contest/index']],
         ['label' => '<span class="glyphicon glyphicon-send"></span> ' . Yii::t('app', 'Polygon'), 'url' => ['/polygon']],
- ['label' => '<span class="glyphicon glyphicon-film"></span> ' . Yii::t('app', 'Dr. Wu\'s course'), 'url' => ['/courses/index.html']],
+ ['label' => '<span class="glyphicon glyphicon-th-large"></span> ' . Yii::t('app', 'More'), 'url' => ['/courses/index.html']],
         [
             'label' => '<span class="glyphicon glyphicon-info-sign"></span> '. Yii::t('app', 'Wiki'),
             'url' => ['/wiki/index'],

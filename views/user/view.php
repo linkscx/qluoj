@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $contests array */
 /* @var $contestCnt integer */
 
-$this->title = $model->nickname;
+$this->title = $model->nickname . ' - ' .  Yii::$app->setting->get('ojName');
 $solutionStats = $model->getSolutionStats();
 $recentSubmission = $model->getRecentSubmission();
 $plotJS = <<<EOT

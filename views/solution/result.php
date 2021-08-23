@@ -6,7 +6,7 @@ use app\models\Solution;
 /* @var $this yii\web\View */
 /* @var $model app\models\Solution */
 
-$this->title = $model->id;
+$this->title = 'Run ID ' . $model->id . ' - Status - ' .  Yii::$app->setting->get('ojName');
 $json = NULL;
 
 if (!$model->canViewErrorInfo()) {

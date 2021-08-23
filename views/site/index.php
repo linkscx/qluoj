@@ -12,7 +12,7 @@ $this->title = Yii::$app->setting->get('ojName');
     <div class="col-md-8">
         <div class="jumbotron">
             <h1>Welcome!!!</h1>
-            <p>欢迎来到<?= Yii::$app->setting->get('schoolName') ?>在线判题系统——<?= Yii::$app->setting->get('ojName') ?> Online Judge</p>
+            <p>欢迎来到<?= Yii::$app->setting->get('schoolName') ?>在线判题系统——QLU Online Judge</p>
             <img src="https://s3.ax1x.com/2021/01/29/yi73o4.jpg" width=400px height=300px />
         </div>
         <hr>

@@ -6,7 +6,7 @@ use app\models\User;
 /* @var $this yii\web\View */
 /* @var $model app\models\Solution */
 
-$this->title = $model->id;
+$this->title = 'Run ID ' . $model->id . ' - Status - ' .  Yii::$app->setting->get('ojName');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Status'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
