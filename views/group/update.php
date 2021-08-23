@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Group */
 
-$this->title = $model->name;
+$this->title = $model->name . ' - ' .  Yii::$app->setting->get('ojName');
 ?>
 <div class="group-update">
 

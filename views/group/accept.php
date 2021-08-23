@@ -8,7 +8,7 @@ use app\models\GroupUser;
 /* @var $this yii\web\View */
 /* @var $model app\models\Group */
 /* @var $userDataProvider yii\data\ActiveDataProvider */
-$this->title = Html::encode($model->name);
+$this->title = Html::encode($model->name . ' - ' .  Yii::$app->setting->get('ojName'));
 ?>
 <h2><?= Html::a(Html::encode($model->name), ['/group/view', 'id' => $model->id]) ?></h2>
 <?php if ($model->getRole() == GroupUser::ROLE_INVITING): ?>

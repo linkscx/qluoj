@@ -14,7 +14,7 @@ use app\models\Contest;
 /* @var $newContest app\models\Contest */
 /* @var $newGroupUser app\models\GroupUser */
 
-$this->title = $model->name;
+$this->title = $model->name . ' - ' .  Yii::$app->setting->get('ojName');
 $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
 ?>
 <div class="group-view">
