@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
         'options' => [
-            'data-pjax' => 0
+            'data-pjax' => 1
         ],
     ]); ?>
 
