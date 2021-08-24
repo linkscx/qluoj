@@ -317,37 +317,47 @@ class ContestController extends Controller
     public function actionAddproblem($id)
     {
         $model = $this->findModel($id);
-
+	
         if (($post = Yii::$app->request->post())) {
-            $pid = intval($post['problem_id']);
-            $has_problem = (new Query())->select('id')
-                ->from('{{%problem}}')
-                ->where('id=:id', [':id' => $pid])
-                ->exists();
-            if ($has_problem) {
-                $problem_in_contest = (new Query())->select('problem_id')
-                    ->from('{{%contest_problem}}')
-                    ->where(['problem_id' => $pid, 'contest_id' => $model->id])
-                    ->exists();
-                if ($problem_in_contest) {
-                    Yii::$app->session->setFlash('info', Yii::t('app', 'This problem has in the contest.'));
-                    return $this->redirect(['contest/view', 'id' => $id]);
-                }
-                $count = (new Query())->select('contest_id')
-                    ->from('{{%contest_problem}}')
-                    ->where(['contest_id' => $model->id])
-                    ->count();
+	    $pids = explode(",", $post['problem_id']);
+	    $succ_pid = '';
+	    $err_pid = '';
+	    foreach($pids as $pid_str){
+		$pid = intval($pid_str);
+                $has_problem = (new Query())->select('id')
+               	    ->from('{{%problem}}')
+               	    ->where('id=:id', [':id' => $pid])
+               	    ->exists();
+            	if ($has_problem) {
+                    $problem_in_contest = (new Query())->select('problem_id')
+                        ->from('{{%contest_problem}}')
+                    	->where(['problem_id' => $pid, 'contest_id' => $model->id])
+                    	->exists();
+                    if ($problem_in_contest) {
+                        Yii::$app->session->setFlash('info', Yii::t('app', 'This problem has in the contest.'));
+                        return $this->redirect(['contest/view', 'id' => $id]);
+                    }
+                    $count = (new Query())->select('contest_id')
+                        ->from('{{%contest_problem}}')
+                        ->where(['contest_id' => $model->id])
+                        ->count();
 
-                Yii::$app->db->createCommand()->insert('{{%contest_problem}}', [
-                    'problem_id' => $pid,
-                    'contest_id' => $model->id,
-                    'num' => $count
-                ])->execute();
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Submitted successfully'));
-            } else {
-                Yii::$app->session->setFlash('error', Yii::t('app', 'No such problem.'));
-            }
-        }
+                    Yii::$app->db->createCommand()->insert('{{%contest_problem}}', [
+                        'problem_id' => $pid,
+                        'contest_id' => $model->id,
+                        'num' => $count
+			])->execute();
+		    if(empty($succ_pid))$succ_pid .= $pid_str;
+		    else $succ_pid .= "," . $pid_str;
+		} else {
+		    if(empty($err_pid))$err_pid .= $pid_str;
+		    else $err_pid .= "," . $pid_str;
+                }
+	    }
+	    if(!empty($succ_pid))Yii::$app->session->setFlash('success', Yii::t('app', 'Problem ID :' . $succ_pid . ', Submitted successfully'));
+	    if(!empty($err_pid))Yii::$app->session->setFlash('error', Yii::t('app', 'Problem ID :' . $err_pid . ', No such problem.'));
+
+	}
         return $this->redirect(['contest/view', 'id' => $id]);
     }
 

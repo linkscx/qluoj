@@ -248,15 +248,16 @@ $problems = $model->problems;
                 <th></th>
                 <th>
                     <?php Modal::begin([
-                        'header' => '<h3>' . Yii::t('app','Add a problem') . '</h3>',
-                        'toggleButton' => ['label' => Yii::t('app','Add a problem'), 'class' => 'btn btn-success'],
+                        'header' => '<h3>' . Yii::t('app','Add Problems') . '</h3>',
+                        'toggleButton' => ['label' => Yii::t('app','Add Problems'), 'class' => 'btn btn-success'],
                     ]); ?>
 
                     <?= Html::beginForm(['contest/addproblem', 'id' => $model->id]) ?>
 
                     <div class="form-group">
-                        <?= Html::label(Yii::t('app', 'Problem ID'), 'problem_id') ?>
-                        <?= Html::textInput('problem_id', '',['class' => 'form-control']) ?>
+                        <?= Html::label(Yii::t('app', 'Problems ID'), 'problem_id') ?>
+			<?= Html::textInput('problem_id', '',['class' => 'form-control']) ?>
+		        <p class="help-block">请提供题目ID，多个题目请以英文逗号(,)隔开</p>	
                     </div>
 
                     <div class="form-group">
