@@ -28,7 +28,7 @@ $isContestEnd = $model->isContestEnd();
     <?php if ($model->isScoreboardFrozen()) :?>
         <p class="text-center">现已是封榜状态，榜单将不再实时更新，只显示封榜前的提交及您个人的所有提交记录。</p>
     <?php endif; ?>
-    <?php Pjax::begin() ?>
+    <?php //Pjax::begin() ?>
     <?php if ($model->type != Contest::TYPE_OI || $isContestEnd): ?>
     <?= $this->render('_status_search', ['model' => $searchModel, 'nav' => $nav, 'contest_id' => $model->id]); ?>
     <?php endif; ?>
@@ -42,7 +42,7 @@ $isContestEnd = $model->isContestEnd();
             [
                 'attribute' => 'id',
                 'value' => function ($model, $key, $index, $column) {
-                    return Html::a($model->id, ['/solution/detail', 'id' => $model->id], ['target' => '_blank']);
+                    return Html::a($model->id, ['/solution/detail', 'id' => $model->id], ['target' => '_blank', 'data-pjax' => 0]);
                 },
                 'format' => 'raw'
             ],
@@ -66,7 +66,7 @@ $isContestEnd = $model->isContestEnd();
                         return $model->problem->title;
                     }
                     return Html::a(chr(65 + $res->num) . ' - ' . $model->problem->title,
-                        ['/contest/problem', 'id' => $res->contest_id, 'pid' => $res->num]);
+                        ['/contest/problem', 'id' => $res->contest_id, 'pid' => $res->num, 'data-pjax' => 0]);
                 },
                 'format' => 'raw'
             ],
@@ -202,7 +202,7 @@ if (waitingCount > 0) {
 EOF;
 $this->registerJs($js);
 ?>
-    <?php Pjax::end() ?>
+    <?php //Pjax::end() ?>
 </div>
 <?php Modal::begin([
     'options' => ['id' => 'solution-info']

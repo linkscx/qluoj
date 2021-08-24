@@ -17,7 +17,7 @@ use yii\bootstrap\ActiveForm;
         'method' => 'get',
         'options' => [
             'class' => 'form-inline',
-            'data-pjax' => 1
+            'data-pjax' => 0
         ],
     ]); ?>
 
