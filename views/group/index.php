@@ -16,7 +16,7 @@ $this->title = Yii::t('app', 'Groups' . ' - ' .  Yii::$app->setting->get('ojName
             'visible' => !Yii::$app->user->isGuest
         ],
         [
-            'label' => Yii::t('app', 'Explore'),
+            'label' => Yii::t('app', 'All Groups'),
             'url' => ['group/index']
         ],
         [
