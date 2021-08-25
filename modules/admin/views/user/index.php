@@ -25,9 +25,10 @@ $this->title = Yii::t('app', 'Users');
         ]);?>
         <?php $form = ActiveForm::begin(['options' => ['target' => '_blank']]); ?>
 
-        <p class="hint-block">1. 一个用户占据一行，每行格式为<code>username password</code>，即用户名与密码之间有一个空格。自行删除多余的空行。</p>
-        <p class="hint-block">2. 用户名只能以数字、字母、下划线，且非纯数字，长度在 4 - 32 位之间</p>
-        <p class="hint-block">3. 密码至少六位</p>
+        <p class="hint-block">1. 一个用户占据一行，每行格式为<code>username nickname password</code>，即用户名与昵称，昵称与密码之间有一个空格。自行删除多余的空行。</p>
+	<p class="hint-block">2. 用户名只能以数字、字母、下划线，且非纯数字，长度在 4 - 32 位之间</p>
+	<p class="hint-block">3. 昵称不允许使用空格和换行符</p>
+        <p class="hint-block">4. 密码至少六位, 且不允许使用空格和换行符</p>
 
         <?= $form->field($generatorForm, 'names')->textarea(['rows' => 10])  ?>
 

@@ -109,11 +109,12 @@ class GenerateUserForm extends Model
             if (empty($pieces[$i - 1]))
                 continue;
             $u = explode(' ', trim($pieces[$i - 1]));
-            $username = $u[0];
-            $password = $u[1];
+	    $username = $u[0];
+	    $nickname = $u[1];
+            $password = $u[2];
             $user = new User();
             $user->username = $username;
-            $user->nickname = $username;
+            $user->nickname = $nickname;
             $user->email = $username . '@jnoj.org';
             $user->role = User::ROLE_USER;
             $user->setPassword($password);
