@@ -156,7 +156,7 @@ class ProblemController extends Controller
             $fp = fopen($dataPath . '/spj.cc',"w");
 	    fputs($fp, $model->spj_source);
 	    fclose($fp); 
-	    $spjCommand = "g++ -std=c++11 -O2 " . $dataPath . "/spj.cc -o " . $dataPath ."/spj &";  
+	    $spjCommand = "g++ -std=c++17 -O2 " . $dataPath . "/spj.cc -o " . $dataPath ."/spj &";  
 	    exec($spjCommand);
             return $this->redirect(['spj', 'id' => $model->id]);
         }
