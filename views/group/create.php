@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\ForbiddenHttpException;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Group */
@@ -19,4 +20,4 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
 
     </div>
-<?php else : echo "You are not allowed to perform this action."; endif;?>
+<?php else : throw new ForbiddenHttpException('You are not allowed to perform this action.'); endif;?>
