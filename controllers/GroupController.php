@@ -102,7 +102,7 @@ class GroupController extends BaseController
         if ($model->isMember()) {
             return $this->redirect(['/group/view', 'id' => $model->id]);
         }
-        if ($model->join_policy == Group::JOIN_POLICY_INVITE && $model->getRole() != GroupUser::ROLE_INVITING) {
+        if ($model->join_policy == Group::JOIN_POLICY_ADD && $model->getRole() != GroupUser::ROLE_INVITING) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
         $userDataProvider = new ActiveDataProvider([
@@ -165,7 +165,7 @@ class GroupController extends BaseController
                                     $model->join_policy == Group::JOIN_POLICY_FREE ||
                                     $model->join_policy == Group::JOIN_POLICY_APPLICATION)) {
             return $this->redirect(['/group/accept', 'id' => $model->id]);
-        } else if (!$model->isMember() && $model->join_policy == Group::JOIN_POLICY_INVITE) {
+        } else if (!$model->isMember() && $model->join_policy == Group::JOIN_POLICY_ADD) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
         $newGroupUser = new GroupUser();
@@ -197,28 +197,46 @@ class GroupController extends BaseController
         if ($newGroupUser->load(Yii::$app->request->post())) {
             if (!$model->hasPermission()) {
                 throw new ForbiddenHttpException('You are not allowed to perform this action.');
-            }
-            //　查找用户ID 以及查看是否已经加入比赛中
-            $query = (new Query())->select('u.id as user_id, count(g.user_id) as exist')
-                ->from('{{%user}} as u')
-                ->leftJoin('{{%group_user}} as g', 'g.user_id=u.id')
-                ->where('u.username=:name and g.group_id=:gid', [':name' => $newGroupUser->username, ':gid' => $model->id])
-                ->one();
-            if (!isset($query['user_id'])) {
-                Yii::$app->session->setFlash('error', '不存在该用户');
-            } else if (!$query['exist']) {
-                $newGroupUser->role = GroupUser::ROLE_INVITING;
-                $newGroupUser->created_at = new Expression('NOW()');
-                $newGroupUser->user_id = $query['user_id'];
-                $newGroupUser->group_id = $model->id;
-                $newGroupUser->save();
-                Yii::$app->session->setFlash('success', '已邀请');
-            } else {
-                Yii::$app->db->createCommand()->update('{{%group_user}}', [
-                    'role' => GroupUser::ROLE_INVITING
-                ], ['user_id' => $query['user_id'], 'group_id' => $model->id])->execute();
-                Yii::$app->session->setFlash('error', '已邀请');
-            }
+	    }
+	    //　查找用户ID 以及查看是否已经加入比赛
+	    $newGroupUser->username = str_replace("\r", "", $newGroupUser->username);
+	    $newGroupUser->username = str_replace(" ", "", $newGroupUser->username);
+	    $usernames = explode(PHP_EOL, $newGroupUser->username);
+	    $tot_num = 0;
+	    $succ_num = 0;
+	    $err_num = 0;
+	    $exis_num = 0;
+	    $err_uname = "";
+	    $exis_uname = "";
+	    foreach($usernames as $user_name){
+		if(!empty($user_name)){
+	            $query = (new Query())->select('u.id as user_id, count(g.user_id) as exist')
+                        ->from('{{%user}} as u')
+                        ->leftJoin('{{%group_user}} as g', 'g.user_id=u.id')
+                        ->where('u.username=:name and g.group_id=:gid', [':name' => $user_name, ':gid' => $model->id])
+			->one();
+		    $tot_num++;
+		    if (!isset($query['user_id'])) {
+			if(empty($err_uname))$err_uname .= "\"" . $user_name . "\""; else $err_uname .= ", " . "\"" . $user_name . "\"";
+			$err_num++;
+	    	    } else if (!$query['exist']) {
+		        Yii::$app->db->createCommand()->insert('{{%group_user}}', [
+                            'user_id' => $query['user_id'],
+                            'group_id' => $model->id,
+                            'created_at' => new Expression('NOW()'),
+                            'role' => GroupUser::ROLE_MEMBER
+		    	])->execute();
+			$succ_num++;
+		    } else {
+			if(empty($exis_uname))$exis_uname .= "\"" . $user_name . "\""; else $exis_uname .= ", " . "\"" . $user_name . "\"";
+			$exis_num++;
+		    }
+		}
+		Yii::$app->session->setFlash('success', ['本次共添加： ' . $tot_num . '人 ：', $succ_num . '人已成功添加，']);
+		if($err_num != 0 && $exis_num != 0)Yii::$app->session->setFlash('info', [$err_num . '人添加失败，不存在的用户ID：' . $err_uname . '，', $exis_num . '人已存在，请勿重复添加，ID：' . $exis_uname . '。']);
+		else if($err_num != 0)Yii::$app->session->setFlash('info', $err_num . '人添加失败，不存在的用户ID：' . $err_uname . '，');
+		else if($exis_num != 0)Yii::$app->session->setFlash('info', $exis_num . '人已存在，请勿重复添加，ID：' . $exis_uname . '。');
+	    }
             return $this->refresh();
         }
 
@@ -240,7 +258,7 @@ class GroupController extends BaseController
     {
         $model = new Group();
         $model->status = Group::STATUS_VISIBLE;
-        $model->join_policy = Group::JOIN_POLICY_INVITE;
+        $model->join_policy = Group::JOIN_POLICY_ADD;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $groupUser = new GroupUser();

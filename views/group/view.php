@@ -20,7 +20,7 @@ $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
 <div class="group-view">
     <div class="row">
         <div class="col-md-3">
-            <h1><?= Html::a(Html::encode($this->title), ['/group/view', 'id' => $model->id]) ?></h1>
+            <h2><?= Html::a(Html::encode($this->title), ['/group/view', 'id' => $model->id]) ?></h2>
             <?php if (!Yii::$app->user->isGuest && ($model->role == GroupUser::ROLE_LEADER || Yii::$app->user->identity->isAdmin())): ?>
             <?= Html::a(Yii::t('app', 'Setting'), ['/group/update', 'id' => $model->id], ['class' => 'btn btn-default btn-block']) ?>
             <?php endif; ?>
@@ -130,27 +130,29 @@ $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
             ]); ?>
 
             <div>
-                <h2 style="display: inline">
+                <h2>
                     <?= Yii::t('app', 'Member'); ?>
-                </h2>
-                <?php if ($model->hasPermission()): ?>
-                    <?php Modal::begin([
-                        'header' => '<h3>' . Yii::t('app', 'Invite Member') . '</h3>',
-                        'toggleButton' => [
-                            'label' => Yii::t('app', 'Invite Member'),
-                            'tag' => 'a',
-                            'style' => 'cursor:pointer;'
-                        ]
-                    ]); ?>
-                    <?php $form = ActiveForm::begin(); ?>
-                    <?= $form->field($newGroupUser, 'username')->textInput(['maxlength' => true, 'autocomplete' => 'off']) ?>
-                    <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary']) ?>
-                    </div>
+		</h2>
+		<?php if ($model->hasPermission()): ?>
+		    <?php Modal::begin([
+                        'header' => '<h2>' . Yii::t('app', 'Add Members') . '</h2>',
+                        'toggleButton' => ['label' => Yii::t('app', 'Add Members'), 'class' => 'btn btn-success'],
+                    ]);?>
+                    <?php $form = ActiveForm::begin(['options' => ['target' => '_blank']]); ?>
+			<p class="hint-block">一个用户占据一行，每行格式为<code>username</code></p>
+			<p class="hint-block">请注意，输入的是<code>username</code>，而不是<code>nickname</code></p>
+
+                        <?= $form->field($newGroupUser, 'username')->textarea(['rows' => 10])  ?>
+
+                        <div class="form-group">
+                            <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-success']) ?>
+                        </div>
+
                     <?php ActiveForm::end(); ?>
                     <?php Modal::end(); ?>
                 <?php endif; ?>
-            </div>
+	    </div>
+	    <br>
             <?= GridView::widget([
                 'layout' => '{items}{pager}',
                 'dataProvider' => $userDataProvider,

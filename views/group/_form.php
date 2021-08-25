@@ -18,8 +18,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'join_policy')->radioList([
-        Group::JOIN_POLICY_INVITE => Yii::t('app', 'Invite Only'),
-        Group::JOIN_POLICY_APPLICATION => Yii::t('app', 'Application & Approve'),
+        Group::JOIN_POLICY_ADD => Yii::t('app', 'Add Only'),
+        Group::JOIN_POLICY_APPLICATION => Yii::t('app', 'Add | Apply-Approve'),
         Group::JOIN_POLICY_FREE => Yii::t('app', 'Free')
     ])?>
 

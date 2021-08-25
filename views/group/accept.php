@@ -11,12 +11,7 @@ use app\models\GroupUser;
 $this->title = Html::encode($model->name . ' - ' .  Yii::$app->setting->get('ojName'));
 ?>
 <h2><?= Html::a(Html::encode($model->name), ['/group/view', 'id' => $model->id]) ?></h2>
-<?php if ($model->getRole() == GroupUser::ROLE_INVITING): ?>
-    <h3>邀请你加入小组：</h3>
-    <h4><?= Yii::$app->formatter->asMarkdown($model->description) ?></h4>
-    <?= Html::a('同意加入', ['/group/accept', 'id' => $model->id, 'accept' => 1], ['class' => 'btn btn-success']) ?>
-    <?= Html::a('残忍拒绝', ['/group/accept', 'id' => $model->id, 'accept' => 0], ['class' => 'btn btn-danger']) ?>
-<?php elseif ($model->join_policy == Group::JOIN_POLICY_APPLICATION): ?>
+<?php if ($model->join_policy == Group::JOIN_POLICY_APPLICATION): ?>
     <?= Html::a('申请加入', ['/group/accept', 'id' => $model->id, 'accept' => 3], ['class' => 'btn btn-success']) ?>
 <?php elseif ($model->join_policy == Group::JOIN_POLICY_FREE): ?>
     <?= Html::a('加入小组', ['/group/accept', 'id' => $model->id, 'accept' => 2], ['class' => 'btn btn-success']) ?>

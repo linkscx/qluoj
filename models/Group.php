@@ -21,7 +21,7 @@ class Group extends ActiveRecord
     const STATUS_HIDDEN = 0;
     const STATUS_VISIBLE = 1;
 
-    const JOIN_POLICY_INVITE = 0;
+    const JOIN_POLICY_ADD = 0;
     const JOIN_POLICY_APPLICATION = 1;
     const JOIN_POLICY_FREE = 2;
     /**

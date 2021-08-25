@@ -22,7 +22,7 @@ $this->title = Yii::t('app', 'Groups' . ' - ' .  Yii::$app->setting->get('ojName
         [
             'label' => Yii::t('app', 'Create'),
             'url' => 'create',
-            'visible' => !Yii::$app->user->isGuest,
+            'visible' => (!Yii::$app->user->isGuest && (Yii::$app->user->identity->isVip() || Yii::$app->user->identity->isAdmin())),
             'options' => ['class' => 'pull-right']
         ]
     ],

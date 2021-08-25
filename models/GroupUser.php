@@ -89,7 +89,7 @@ class GroupUser extends \yii\db\ActiveRecord
             Yii::t('app', 'Apply to join'),
             Yii::t('app', 'Member'),
             Yii::t('app', 'Manager'),
-            Yii::t('app', 'Leader')
+            Yii::t('app', 'Creator')
         ];
         if (!$color) {
             return $roles[$this->role];

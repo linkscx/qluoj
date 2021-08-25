@@ -9,12 +9,14 @@ $this->title = Yii::t('app', 'Create Group' . ' - ' .  Yii::$app->setting->get('
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Groups'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="group-create">
+<?php if((Yii::$app->user->identity->isVip() || Yii::$app->user->identity->isAdmin())) : ?>
+    <div class="group-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        <?= '<h1>' . Html::encode($this->title) . '</h1>' ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
 
-</div>
+    </div>
+<?php else : echo "You are not allowed to perform this action."; endif;?>
