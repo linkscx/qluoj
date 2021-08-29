@@ -45,12 +45,14 @@ class ProblemController extends BaseController
     {
         $query = Problem::find();
 
-        if (($get = Yii::$app->request->get())) {
+	if (($get = Yii::$app->request->get())) {
+	  if(!empty($get['q'])){
             $query->orWhere(['like', 'title', $get['q']])
                 ->orWhere(['like', 'id', $get['q']])
                 ->orWhere(['like', 'source', $get['q']])
                 ->orWhere(['like', 'tags', $get['q']]);
-        }
+	  }
+	}
         $query->andWhere('status<>' . Problem::STATUS_HIDDEN);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
