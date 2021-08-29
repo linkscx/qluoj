@@ -74,7 +74,7 @@ $this->title = Yii::t('app', 'Problems' . ' - ' .  Yii::$app->setting->get('ojNa
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-body">
-                <?= Html::beginForm('', 'post', ['class' => 'form-inline']) ?>
+                <?= Html::beginForm('', 'get', ['class' => 'form-inline']) ?>
                 <div class="input-group">
                     <?= Html::label(Yii::t('app', 'Search'), 'q', ['class' => 'sr-only']) ?>
                     <?= Html::textInput('q', '', ['class' => 'form-control', 'placeholder' => '输入 ID /标题/来源/ Tags']) ?>
@@ -93,7 +93,7 @@ $this->title = Yii::t('app', 'Problems' . ' - ' .  Yii::$app->setting->get('ojNa
                     'items' => $tags,
                     'url' => ['/problem/index'],
                     'format' => 'ul',
-                    'urlParam' => 'tag',
+                    'urlParam' => 'q',
                     'listOptions' => ['class' => 'tag-group'],
                     'liOptions' => ['class' => 'tag-group-item']
                 ]) ?>

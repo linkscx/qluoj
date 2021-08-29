@@ -45,14 +45,11 @@ class ProblemController extends BaseController
     {
         $query = Problem::find();
 
-        if (Yii::$app->request->get('tag') != '') {
-            $query->andWhere('tags LIKE :tag', [':tag' => '%' . Yii::$app->request->get('tag') . '%']);
-        }
-        if (($post = Yii::$app->request->post())) {
-            $query->orWhere(['like', 'title', $post['q']])
-                ->orWhere(['like', 'id', $post['q']])
-                ->orWhere(['like', 'source', $post['q']])
-                ->orWhere(['like', 'tags', $post['q']]);
+        if (($get = Yii::$app->request->get())) {
+            $query->orWhere(['like', 'title', $get['q']])
+                ->orWhere(['like', 'id', $get['q']])
+                ->orWhere(['like', 'source', $get['q']])
+                ->orWhere(['like', 'tags', $get['q']]);
         }
         $query->andWhere('status<>' . Problem::STATUS_HIDDEN);
         $dataProvider = new ActiveDataProvider([

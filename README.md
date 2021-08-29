@@ -21,6 +21,8 @@
 
 2021.08.29
 
+	[&] 修复了Problem List 搜索后点击下一页，搜索被取消的问题
+	[+] 增加了problem-statistics点击language标签查看源码
 	[&] 修复了problem-statistics页面点击属性名不能排序的问题
 
 2021.08.25
