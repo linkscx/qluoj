@@ -58,14 +58,20 @@ $stats = $model->getStatisticsData();
 
 <hr>
 <div class="solution-index" style="padding: 0 50px">
-    <h2>提交排行</h2>
+    <h2>通过排行</h2>
     <?= GridView::widget([
         'layout' => '{items}{pager}',
         'dataProvider' => $dataProvider,
         'options' => ['class' => 'table-responsive'],
         'tableOptions' => ['class' => 'table table-striped table-bordered'],
         'columns' => [
-            [
+	    [                                                                                                                              
+	        'attribute' => 'id',                                                                                                       
+		'value' => function ($model, $key, $index, $column) {                                                                      
+		    return Html::a($model->id, ['/solution/detail', 'id' => $model->id], ['target' => '_blank', 'data-pjax' => 0]);        
+		},                                                                                                                         
+		'format' => 'raw'                                                                                                          	       ],		
+	    [
                 'attribute' => 'who',
                 'value' => function ($model, $key, $index, $column) {
                     return Html::a($model->username, ['/user/view', 'id' => $model->created_by]);

@@ -98,8 +98,8 @@ class ProblemController extends BaseController
 
         $dataProvider = new ActiveDataProvider([
             'query' => Solution::find()->with('user')
-                ->where(['problem_id' => $model->id, 'result' => Solution::OJ_AC])
-                ->orderBy(['time' => SORT_ASC, 'memory' => SORT_ASC, 'code_length' => SORT_ASC]),
+	    	->where(['problem_id' => $model->id, 'result' => Solution::OJ_AC]),
+	    'sort' => ['defaultOrder' => ['id' => SORT_DESC]],
             'pagination' => [
                 'pageSize' => 10,
             ],
