@@ -95,7 +95,6 @@ $solution->language = Yii::$app->user->identity->language;
     ],
 ]); ?>
 <hr>
-<?php if (!$model->spj): ?>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($solution, 'language')->dropDownList(Solution::getLanguageList()) ?>
@@ -106,8 +105,4 @@ $solution->language = Yii::$app->user->identity->language;
         <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
-<?php else: ?>
-    <p>
-        当前验题功能尚未支持用SPJ来进行验证的题目。
-    </p>
-<?php endif; ?>
+

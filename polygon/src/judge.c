@@ -811,17 +811,15 @@ void judge_solution(struct problem_struct problem, int * ACflg, int usedtime,
     // compare
     if (*ACflg == OJ_AC) {
         if (problem.isspj) {
-            comp_res = OJ_SE; //因暂无限制SPJ运行环境，Polygon暂不支持SPJ验题
-            // comp_res = special_judge(oj_home, problem.id, infile, outfile,
-            //                          userfile);
-            // if (comp_res == 0) {
-            //     comp_res = OJ_AC;
-            // } else {
-            //     if (DEBUG)
-            //         printf("fail test %s\n", infile);
-            //     comp_res = OJ_WA;
-            //     make_diff_out(outfile);
-            // }
+            comp_res = special_judge(oj_home, problem.id, infile, outfile, userfile);
+            if (comp_res == 0) {
+                comp_res = OJ_AC;
+            } else {
+                if (DEBUG)
+                     printf("fail test %s\n", infile);
+                comp_res = OJ_WA;
+                make_diff_out(outfile);
+            }
         } else {
             comp_res = compare(outfile, userfile);
         }
