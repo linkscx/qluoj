@@ -165,7 +165,16 @@ $nextProblemID = $model->getNextProblemID();
                 </div>
                 <div class="separator"></div>
                 <div>
-                    <?= Html::a('旧版界面', ['/problem/view', 'id' => $model->id, 'view' => 'classic']) ?>
+		    <?= Html::a('旧版界面', ['/problem/view', 'id' => $model->id, 'view' => 'classic']) ?>
+		    <?php if (!Yii::$app->user->isGuest) : ?>
+		        <?php if (Yii::$app->user->identity->isAdmin()) : ?>
+			    <br>
+			    <?= Html::a('修改题目', ['admin/problem/update', 'id' => $model->id]) ?>
+			<?php elseif (Yii::$app->user->identity->isVip()) : ?>
+			    <br>
+                            <?= Html::a('修改题目', ['vip/problem/update', 'id' => $model->id]) ?>
+			<?php endif; ?>
+		    <?php endif; ?>
                 </div>
             </div>
         </div>

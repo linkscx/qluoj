@@ -100,6 +100,15 @@ $nextProblemID = $model->getNextProblemID();
     <div class="col-md-3 problem-info">
 	<div>
 	    <?= Html::a('新版界面', ['/problem/view', 'id' => $model->id]) ?>
+	    <?php if (!Yii::$app->user->isGuest) : ?>
+                <?php if (Yii::$app->user->identity->isAdmin()) : ?>
+		    <?= '|' ?>
+                    <?= Html::a('修改题目', ['admin/problem/update', 'id' => $model->id]) ?>
+                <?php elseif (Yii::$app->user->identity->isVip()) : ?>
+		    <?= '|' ?>
+                    <?= Html::a('修改题目', ['vip/problem/update', 'id' => $model->id]) ?>
+                 <?php endif; ?>
+            <?php endif; ?>
 	</div>
         <div class="panel panel-default">
             <!-- Table -->
