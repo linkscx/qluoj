@@ -23,6 +23,10 @@ $this->title = Html::encode($model->name . ' - ' .  Yii::$app->setting->get('ojN
     'layout' => '{items}{pager}',
     'dataProvider' => $userDataProvider,
     'options' => ['class' => 'table-responsive'],
+    'pager' => [//自定义分页样式
+                'firstPageLabel' => 'First',
+                'lastPageLabel' => 'Last'
+            ],
     'columns' => [
         [
             'attribute' => 'role',

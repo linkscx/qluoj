@@ -157,6 +157,10 @@ $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
                 'layout' => '{items}{pager}',
                 'dataProvider' => $userDataProvider,
                 'options' => ['class' => 'table-responsive'],
+                    'pager' => [//自定义分页样式
+                    'firstPageLabel' => 'First',
+                    'lastPageLabel' => 'Last'
+                ],
                 'columns' => [
                     [
                         'attribute' => 'role',
