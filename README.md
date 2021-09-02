@@ -21,11 +21,12 @@
 
 2021.09.01
 
-	[&] 修改了Contest-Register页面排版
+	[+] contest-view增加了比赛前的注册按钮
+	[&] 修改了contest-register页面排版
 	
 2021.08.31
 
-	[+] 为Group查看Members增加了First/Last Page按钮
+	[+] 为group查看members增加了first/last Page按钮
 	[+] 在problem-view新版和旧版界面添加了修改题目的按钮
 
 2021.08.30

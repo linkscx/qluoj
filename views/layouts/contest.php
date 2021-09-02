@@ -117,12 +117,12 @@ $status = $model->getRunStatus();
             <div class="progress hidden-print">
                 <div class="progress-bar progress-bar-success" id="contest-progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 1%;">
                     <?php if ($status == $model::STATUS_NOT_START): ?>
-                        Not start
+                        <font color="black">&nbsp;&nbsp;&nbsp;&nbsp;Not&nbsp;Start</font>
                         <p><?= date('y-m-d H:i:s', time()) ?></p>
                     <?php elseif ($status == $model::STATUS_RUNNING): ?>
                         Running
                     <?php else: ?>
-                        Contest is over.
+                        Contest&nbsp;is&nbsp;Over.
                     <?php endif; ?>
                 </div>
             </div>
@@ -139,7 +139,21 @@ $status = $model->getRunStatus();
             <?php if (!empty($model->description)): ?>
                 <div class="contest-desc">
                     <?= Yii::$app->formatter->asMarkdown($model->description) ?>
-                </div>
+		</div>
+		<?php if ($model->scenario == Contest::SCENARIO_OFFLINE): ?>
+        		<p>该比赛为线下赛，如需参赛，请联系管理员</p>
+		<?php else: ?>
+		    <?php
+        	        $link = Html::a(Yii::t('app', 'Register »'), ['/contest/register', 'id' => $model->id]);
+                        if (!Yii::$app->user->isGuest && $model->isUserInContest()) {
+                            echo "<span class=\"well-done\">" . Yii::t('app', 'Registration completed') . "</span>";
+                        }else
+                        if ($model->status == Contest::STATUS_VISIBLE &&
+                            !$model->isContestEnd()) {
+                            echo $link;
+		        }
+		    ?>
+		<?php endif; ?>
             <?php endif; ?>
         <?php elseif (!$model->canView()): ?>
             <?= $content ?>
