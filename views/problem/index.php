@@ -47,7 +47,7 @@ $this->title = Yii::t('app', 'Problems' . ' - ' .  Yii::$app->setting->get('ojNa
                             $res .= '<span class="problem-list-tags">';
                             foreach((array)$tags as $tag) {
                                 $res .= Html::a('<span class="label label-default">' . Html::encode($tag) . '</span>', [
-                                    '/problem/index', 'tag' => $tag
+                                    '/problem/index', 'q' => $tag
                                 ]);
                             }
                             $res .= '</span>';
