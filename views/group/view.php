@@ -32,7 +32,7 @@ $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
             <p><?= Yii::t('app', 'Join Policy') ?>: <?= $model->getJoinPolicy() ?></p>
 	    <p><?= Yii::t('app', 'Status') ?>: <?= $model->getStatus() ?></p>
 	    <hr>
-	    <p>账号或题目问题请联系管理员QQ:1098509291</p>
+	    <p>网站&账号&题目问题请联系管理员<br>QQ: 1098509291<br>WeChat: linkscx<br>Email: linkscx@163.com</p>
         </div>
         <div class="col-md-9">
             <div>
@@ -152,7 +152,15 @@ $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
 
                     <?php ActiveForm::end(); ?>
                     <?php Modal::end(); ?>
-                <?php endif; ?>
+		<?php endif; ?>
+		<?php if($model->hasPermission()): ?>
+			<?php Modal::begin([
+				'header' => '<h2>Export Grade</h2>',
+				'toggleButton' => ['label' =>'Export Grade', 'class' => 'btn btn-success'],
+			]);?>
+			<p>该功能尚在开发中..</p>
+			<?php Modal::end(); ?>
+		<?php endif; ?>
 	    </div>
 	    <br>
             <?= GridView::widget([
@@ -170,8 +178,15 @@ $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
                             return $model->getRole(true);
                         },
                         'format' => 'raw',
-                        'options' => ['width' => '150px']
-                    ],
+                        'options' => ['width' => '80px']
+		    ],
+		    [
+			'attribute' => 'Username',
+			'value' => function($model, $key, $index, $column) {
+			    return Html::a(Html::encode($model->user->username), ['/user/view', 'id' => $model->user->id]);
+			},
+			'format' => 'raw',
+		    ],
                     [
                         'attribute' => Yii::t('app', 'Nickname'),
                         'value' => function ($model, $key, $index, $column) {
