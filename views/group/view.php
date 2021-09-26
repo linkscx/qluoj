@@ -30,7 +30,9 @@ $scoreboardFrozenTime = Yii::$app->setting->get('scoreboardFrozenTime') / 3600;
             </p>
             <hr>
             <p><?= Yii::t('app', 'Join Policy') ?>: <?= $model->getJoinPolicy() ?></p>
-            <p><?= Yii::t('app', 'Status') ?>: <?= $model->getStatus() ?></p>
+	    <p><?= Yii::t('app', 'Status') ?>: <?= $model->getStatus() ?></p>
+	    <hr>
+	    <p>账号或题目问题请联系管理员QQ:1098509291</p>
         </div>
         <div class="col-md-9">
             <div>
