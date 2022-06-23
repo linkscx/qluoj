@@ -3,7 +3,7 @@
     <br>
 </p>
 
-### 介绍 | [![svg](https://img.shields.io/badge/Github-QLUOJ-green.svg)](https://github.com/linkscx/qluoj)
+### 介绍 | [![svg](https://img.shields.io/badge/Gitee-QLUOJ-brightgreen)](https://gitee.com/linkscx/qluoj)
 
 	QLUOJ是一款基于JNOJ开发的OJ，由我校OJ开发组进行维护和二次开发。
 
@@ -18,6 +18,11 @@
 	[&] 表示为修改功能   
 
 - - -
+
+2022.06.23
+
+	[&] 关闭数据库的配置文件与远程仓库的追踪，提交时不更新
+	[+] 上线了人物志，修改导航栏中的More跳转到新的More界面
 
 2021.09.02
 
