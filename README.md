@@ -3,7 +3,7 @@
     <br>
 </p>
 
-### 介绍 | [![svg](https://img.shields.io/badge/Gitee-QLUOJ-brightgreen)](https://gitee.com/linkscx/qluoj)
+### 介绍 | [![svg](https://img.shields.io/badge/Gitee-QLUOJ-brightgreen)](https://gitee.com/linkscx/qluoj) [![svg](https://img.shields.io/badge/Github-QLUOJ-green.svg)](https://github.com/linkscx/qluoj)
 
 	QLUOJ是一款基于JNOJ开发的OJ，由我校OJ开发组进行维护和二次开发。
 
